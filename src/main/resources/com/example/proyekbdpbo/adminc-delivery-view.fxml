@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.proyekbdpbo.adminCabang.deliveryController"
-            prefHeight="896.0" prefWidth="414.0">
 
+<AnchorPane prefHeight="896.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.adminCabang.deliveryController">
+   <children>
+      <HBox layoutY="824.0" prefHeight="84.0" prefWidth="414.0" spacing="80.0">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/store.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="3.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/checklist.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/box.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="45.0" right="45.0" top="15.0" />
+         </padding>
+      </HBox>
+   </children>
 </AnchorPane>

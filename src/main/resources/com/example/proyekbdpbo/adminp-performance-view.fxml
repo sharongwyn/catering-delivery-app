@@ -9,6 +9,5 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.proyekbdpbo.adminPusat.performanceController"
-            prefHeight="896.0" prefWidth="414.0" >
-
+            prefHeight="896.0" prefWidth="414.0">
 </AnchorPane>

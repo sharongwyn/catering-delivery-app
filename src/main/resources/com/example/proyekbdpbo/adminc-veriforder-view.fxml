@@ -6,9 +6,38 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.proyekbdpbo.adminCabang.verifOrderController"
             prefHeight="896.0" prefWidth="414.0">
-
+    <children>
+        <HBox layoutY="824.0" prefHeight="84.0" prefWidth="414.0" spacing="80.0">
+            <children>
+                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/store.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets top="3.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/checklist.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="61.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/box.png" />
+                    </image>
+                </ImageView>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="45.0" right="45.0" top="15.0" />
+            </padding>
+        </HBox>
+    </children>
 </AnchorPane>
