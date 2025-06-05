@@ -14,9 +14,9 @@
             fx:controller="com.example.proyekbdpbo.adminCabang.menuController"
             prefHeight="896.0" prefWidth="414.0">
     <children>
-        <HBox layoutY="824.0" prefHeight="84.0" prefWidth="414.0" spacing="80.0">
+        <HBox layoutY="628.0" prefHeight="74.0" prefWidth="360.0" spacing="68.0">
             <children>
-                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="48.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../images/store.png" />
                     </image>
@@ -24,19 +24,19 @@
                         <Insets top="3.0" />
                     </HBox.margin>
                 </ImageView>
-                <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../images/checklist.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="61.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="61.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../images/box.png" />
                     </image>
                 </ImageView>
             </children>
             <padding>
-                <Insets bottom="15.0" left="45.0" right="45.0" top="15.0" />
+                <Insets bottom="20.0" left="46.0" right="46.0" top="20.0" />
             </padding>
         </HBox>
     </children>
