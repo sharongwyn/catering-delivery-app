@@ -6,9 +6,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.proyekbdpbo.adminPusat.promotionController"
-            prefHeight="896.0" prefWidth="414.0">
-
+            prefHeight="720.0" prefWidth="360.0">
+    <children>
+        <HBox layoutY="640.0" prefHeight="79.0" prefWidth="360.0" spacing="120.0" style="-fx-background-color: #FFF5E1;">
+            <children>
+                <ImageView fx:id="homeIcon" fitHeight="54.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/performance.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="orderIcon" fitHeight="47.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/marketing.png" />
+                    </image>
+                </ImageView>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="75.0" right="75.0" top="15.0" />
+            </padding>
+        </HBox>
+    </children>
 </AnchorPane>
