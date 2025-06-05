@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.proyekbdpbo.adminCabang.menuController"
-            prefHeight="896.0" prefWidth="414.0">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.adminCabang.menuController">
     <children>
-        <HBox layoutY="628.0" prefHeight="74.0" prefWidth="360.0" spacing="68.0">
+        <HBox layoutY="629.0" prefHeight="90.0" prefWidth="334.0" spacing="68.0" style="-fx-background-color: #FFF5E1;">
             <children>
                 <ImageView fitHeight="48.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -36,7 +30,7 @@
                 </ImageView>
             </children>
             <padding>
-                <Insets bottom="20.0" left="46.0" right="46.0" top="20.0" />
+                <Insets bottom="20.0" left="44.0" right="44.0" top="20.0" />
             </padding>
         </HBox>
     </children>
