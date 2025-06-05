@@ -6,34 +6,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane prefHeight="896.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.UserOrderView">
+<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.UserOrderView">
    <children>
-      <HBox layoutX="2.0" layoutY="827.0" prefHeight="77.0" prefWidth="414.0" spacing="50.0">
+      <HBox layoutY="629.0" prefHeight="90.0" prefWidth="335.0" spacing="42.0">
          <children>
-            <ImageView fx:id="homeIcon" fitHeight="54.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeIcon" fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/home.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="orderIcon" fitHeight="54.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="orderIcon" fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/restaurant.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="historyIcon" fitHeight="54.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="historyIcon" fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/order.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="profileIcon" fitHeight="54.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profileIcon" fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/user.png" />
                </image>
             </ImageView>
          </children>
          <padding>
-            <Insets bottom="20.0" left="35.0" right="35.0" top="20.0" />
+            <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
          </padding>
       </HBox>
    </children>
