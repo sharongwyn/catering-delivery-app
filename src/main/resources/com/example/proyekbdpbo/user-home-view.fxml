@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.homeController">
    <children>
@@ -35,5 +41,34 @@
             <Insets bottom="20.0" left="36.0" right="36.0" top="20.0" />
          </padding>
       </HBox>
+      <Label layoutX="39.0" layoutY="59.0" prefHeight="33.0" prefWidth="57.0" text="Hi">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="23.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="pormotionImage" fitHeight="72.0" fitWidth="284.0" layoutX="38.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="32.0" layoutY="289.0" text="REKOMENDASI MENU BESOK">
+         <font>
+            <Font name="Bell MT" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="cartIcon" fitHeight="90.0" fitWidth="100.0" layoutX="238.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true" />
+      <GridPane layoutX="38.0" layoutY="230.0" prefHeight="28.0" prefWidth="313.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.5" minWidth="10.0" prefWidth="136.5" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="99.5" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="30.0" minHeight="9.5" prefHeight="28.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Cabang">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Label>
+            <ChoiceBox prefHeight="25.0" prefWidth="122.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
