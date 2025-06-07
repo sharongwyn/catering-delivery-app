@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.UserOrderView">
+<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.orderController">
    <children>
       <HBox layoutY="629.0" prefHeight="90.0" prefWidth="335.0" spacing="42.0" style="-fx-background-color: #FFF5E1;">
          <children>
@@ -35,5 +44,217 @@
             <Insets bottom="20.0" left="36.0" right="36.0" top="20.0" />
          </padding>
       </HBox>
+      <VBox layoutX="-1.0" prefHeight="128.0" prefWidth="360.0" style="-fx-background-color: #FFF5E1;">
+         <children>
+            <Label fx:id="titleOrderView" prefHeight="35.0" prefWidth="268.0" text="TOMORROW'S MENU">
+               <font>
+                  <Font name="Arial Black" size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="3.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="35.0" top="75.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <HBox layoutX="29.0" layoutY="156.0" prefHeight="25.0" prefWidth="191.0">
+         <children>
+            <Label prefHeight="19.0" prefWidth="70.0" text="Branch">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="3.0" />
+               </HBox.margin>
+            </Label>
+            <ChoiceBox prefHeight="25.0" prefWidth="121.0" />
+         </children>
+      </HBox>
+      <ScrollPane hbarPolicy="NEVER" layoutX="29.0" layoutY="201.0" prefHeight="337.0" prefWidth="307.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="296.0">
+               <children>
+                  <VBox prefHeight="403.0" prefWidth="297.0" spacing="10.0">
+                     <children>
+                        <HBox fx:id="r1" prefHeight="120.0" prefWidth="288.0" spacing="11.0">
+                           <children>
+                              <VBox fx:id="r1m1" prefHeight="117.0" prefWidth="135.0">
+                                 <children>
+                                    <ImageView fx:id="r1m1image" fitHeight="86.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="r1m1name" prefHeight="15.0" prefWidth="100.0" text="&lt;menu name&gt;">
+                                                   <font>
+                                                      <Font name="Arial Rounded MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="r1m1price" text="&lt;menu price&gt;">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="r1m1view" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="View" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="r1m2" prefHeight="117.0" prefWidth="135.0">
+                                 <children>
+                                    <ImageView fx:id="r1m2image" fitHeight="86.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="r1m2name" prefHeight="15.0" prefWidth="100.0" text="&lt;menu name&gt;">
+                                                   <font>
+                                                      <Font name="Arial Rounded MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="r1m2price" text="&lt;menu price&gt;">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="r1m2view" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="View" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="r2" prefHeight="120.0" prefWidth="297.0" spacing="11.0">
+                           <children>
+                              <VBox fx:id="r2m1" prefHeight="117.0" prefWidth="135.0">
+                                 <children>
+                                    <ImageView fx:id="r2m1image" fitHeight="86.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                                    <HBox prefHeight="31.0" prefWidth="140.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="r2m1name" prefHeight="15.0" prefWidth="100.0" text="&lt;menu name&gt;">
+                                                   <font>
+                                                      <Font name="Arial Rounded MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="r2m1price" text="&lt;menu price&gt;">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="r2m1view" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="View" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="r2m2" prefHeight="117.0" prefWidth="135.0">
+                                 <children>
+                                    <ImageView fx:id="r2m2image" fitHeight="86.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                                    <HBox prefHeight="29.0" prefWidth="140.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="r2m2name" prefHeight="15.0" prefWidth="100.0" text="&lt;menu name&gt;">
+                                                   <font>
+                                                      <Font name="Arial Rounded MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="r2m2price" text="&lt;menu price&gt;">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="r2m2view" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="View" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="146.0" prefWidth="277.0" spacing="11.0">
+                           <children>
+                              <VBox fx:id="r3m1" prefHeight="117.0" prefWidth="135.0">
+                                 <children>
+                                    <ImageView fx:id="r3m1image" fitHeight="86.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                                    <HBox prefHeight="60.0" prefWidth="140.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="r3m1name" prefHeight="15.0" prefWidth="100.0" text="&lt;menu name&gt;">
+                                                   <font>
+                                                      <Font name="Arial Rounded MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="r3m1price" text="&lt;menu price&gt;">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="r3m1view" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="View" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="r3m2" prefHeight="117.0" prefWidth="135.0">
+                                 <children>
+                                    <ImageView fx:id="r3m2image" fitHeight="86.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
+                                             <children>
+                                                <Label fx:id="r3m2name" prefHeight="15.0" prefWidth="100.0" text="&lt;menu name&gt;">
+                                                   <font>
+                                                      <Font name="Arial Rounded MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="r3m2price" text="&lt;menu price&gt;">
+                                                   <font>
+                                                      <Font size="11.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <Button fx:id="r3m2view" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="View" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <StackPane fx:id="cart" layoutX="262.0" layoutY="545.0" prefHeight="72.0" prefWidth="77.0">
+         <children>
+            <Circle fx:id="cartCircle" radius="36.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="cartImage" fitHeight="57.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/shopping-cart.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="-0.01" />
+               </effect>
+            </ImageView>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
