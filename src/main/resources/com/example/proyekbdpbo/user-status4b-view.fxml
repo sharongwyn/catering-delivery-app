@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.status4Controller">
+<AnchorPane prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.status4bController">
     <children>
         <HBox layoutY="629.0" prefHeight="90.0" prefWidth="335.0" spacing="42.0" style="-fx-background-color: #FFF5E1;">
             <children>
@@ -60,60 +60,60 @@
         <Text layoutX="135.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
         <Text layoutX="222.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
         <Text layoutX="305.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
-      <Label layoutX="31.0" layoutY="149.0" text="We'd love your feedback!">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="31.0" layoutY="171.0" text="Please rate to help us improve. ">
-         <font>
-            <Font name="Segoe UI" size="16.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffcf7" height="240.0" layoutX="31.0" layoutY="226.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
-      <HBox layoutX="75.0" layoutY="295.0" prefHeight="42.0" prefWidth="210.0">
-         <children>
-            <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/star_empty.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/star_empty.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/star_empty.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/star_empty.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/star_empty.png" />
-               </image>
-            </ImageView>
-         </children>
-      </HBox>
-      <Label layoutX="151.0" layoutY="250.0" text="Order#">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField layoutX="58.0" layoutY="360.0" prefHeight="26.0" prefWidth="238.0" promptText="Enter your review (optional)" />
-      <Button layoutX="142.0" layoutY="412.0" mnemonicParsing="false" style="-fx-background-color: #A3B18A; -fx-border-color: #3E2C23; -fx-background-radius: 15; -fx-border-radius: 15;" text="Submit" textFill="WHITE">
-         <font>
-            <Font name="Segoe UI Bold" size="13.0" />
-         </font>
-         <padding>
-            <Insets bottom="4.0" left="12.0" right="12.0" top="4.0" />
-         </padding>
-      </Button>
+        <Label layoutX="31.0" layoutY="149.0" text="We'd love your feedback!">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="31.0" layoutY="171.0" text="Please rate to help us improve. ">
+            <font>
+                <Font name="Segoe UI" size="16.0" />
+            </font>
+        </Label>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffcf7" height="240.0" layoutX="31.0" layoutY="226.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
+        <HBox layoutX="75.0" layoutY="295.0" prefHeight="42.0" prefWidth="210.0">
+            <children>
+                <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/star_empty.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/star_empty.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/star_empty.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/star_empty.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../images/star_empty.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </HBox>
+        <Label layoutX="144.0" layoutY="250.0" text="Cabang#">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField layoutX="58.0" layoutY="360.0" prefHeight="26.0" prefWidth="238.0" promptText="Enter your review (optional)" />
+        <Button layoutX="142.0" layoutY="412.0" mnemonicParsing="false" style="-fx-background-color: #A3B18A; -fx-border-color: #3E2C23; -fx-background-radius: 15; -fx-border-radius: 15;" text="Submit" textFill="WHITE">
+            <font>
+                <Font name="Segoe UI Bold" size="13.0" />
+            </font>
+            <padding>
+                <Insets bottom="4.0" left="12.0" right="12.0" top="4.0" />
+            </padding>
+        </Button>
     </children>
 
 </AnchorPane>

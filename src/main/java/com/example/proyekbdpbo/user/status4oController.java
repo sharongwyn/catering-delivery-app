@@ -1,4 +1,4 @@
 package com.example.proyekbdpbo.user;
 
-public class status4Controller {
+public class status4oController {
 }
