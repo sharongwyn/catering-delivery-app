@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.homeController">
+<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.homeController">
    <children>
       <HBox layoutY="629.0" prefHeight="90.0" prefWidth="360.0" spacing="42.0" style="-fx-background-color: #FFF5E1;">
          <children>
@@ -54,7 +54,7 @@
                   <Insets bottom="3.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="subtitleHomeView" text="What do you wanna eat for tomorrow?">
+            <Label text="What do you wanna eat for tomorrow?">
                <font>
                   <Font name="Arial Rounded MT Bold" size="12.0" />
                </font>
@@ -66,9 +66,9 @@
       </VBox>
       <ImageView fx:id="promoImage" fitHeight="99.0" fitWidth="299.0" layoutX="29.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/promo%20banner%20home.png" />
+            <Image url="@../../../images/promo-banner-home.png" />
          </image></ImageView>
-      <Label fx:id="menuForTomorrow" layoutX="30.0" layoutY="303.0" prefHeight="23.0" prefWidth="275.0" text="MENU FOR TOMORROW" textAlignment="CENTER">
+      <Label layoutX="30.0" layoutY="303.0" prefHeight="23.0" prefWidth="275.0" text="MENU FOR TOMORROW" textAlignment="CENTER">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="20.0" />
          </font>
@@ -84,7 +84,7 @@
                   <Insets top="1.0" />
                </HBox.margin>
             </Label>
-            <ChoiceBox fx:id="selectBranch" prefHeight="25.0" prefWidth="125.0" />
+            <ChoiceBox fx:id="selectBranch" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #FFF5E1;" />
          </children>
       </HBox>
       <ScrollPane fx:id="scrollMenu" layoutX="30.0" layoutY="341.0" prefHeight="180.0" prefWidth="299.0" vbarPolicy="NEVER">
@@ -128,7 +128,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </ImageView>
-                              <Label fx:id="menu2name" prefHeight="36.0" prefWidth="200.0" text="&lt;menu name&gt;">
+                              <Label fx:id="menu3name" prefHeight="36.0" prefWidth="200.0" text="&lt;menu name&gt;">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="16.0" />
                                  </font>
@@ -141,10 +141,10 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <StackPane fx:id="cart" layoutX="252.0" layoutY="535.0" prefHeight="72.0" prefWidth="77.0">
+      <StackPane fx:id="cart1" layoutX="262.0" layoutY="545.0" prefHeight="72.0" prefWidth="77.0">
          <children>
-            <Circle fx:id="cartCircle" radius="36.0" stroke="BLACK" strokeType="INSIDE" />
-            <ImageView fx:id="cartImage" fitHeight="57.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+            <Circle fx:id="cartCircle1" fill="#665337" radius="36.0" stroke="#665337" strokeType="INSIDE" />
+            <ImageView fx:id="cartImage1" fitHeight="57.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/shopping-cart.png" />
                </image>
