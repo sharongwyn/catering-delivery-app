@@ -25,11 +25,6 @@
                 <Font name="Segoe UI" size="20.0" />
             </font>
         </Text>
-        <Label layoutX="34.0" layoutY="387.0" text="Please rate to help us improve. ">
-            <font>
-                <Font name="Segoe UI" size="16.0" />
-            </font>
-        </Label>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffcf7" height="240.0" layoutX="32.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
         <HBox layoutX="74.0" layoutY="483.0" prefHeight="42.0" prefWidth="210.0">
             <children>
@@ -98,6 +93,14 @@
          <image>
             <Image url="@../../../images/status4.png" />
          </image>
+          <clip>
+              <Rectangle arcHeight="30.0" arcWidth="30.0" height="200.0" width="298.0" />
+          </clip>
       </ImageView>
+        <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/left-arrow.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

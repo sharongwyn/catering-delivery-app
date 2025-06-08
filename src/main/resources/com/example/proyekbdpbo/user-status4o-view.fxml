@@ -22,14 +22,9 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a3b18a" height="40.0" layoutX="289.0" layoutY="72.0" stroke="#3e2c23" strokeType="INSIDE" width="40.0" />
         <Text layoutX="30.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Delivered">
             <font>
-                <Font name="Segoe UI" size="20.0" />
+                <Font name="Segoe UI" size="22.0" />
             </font>
         </Text>
-        <Label layoutX="34.0" layoutY="387.0" text="Please rate to help us improve. ">
-            <font>
-                <Font name="Segoe UI" size="16.0" />
-            </font>
-        </Label>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffcf7" height="240.0" layoutX="32.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
         <HBox layoutX="74.0" layoutY="483.0" prefHeight="42.0" prefWidth="210.0">
             <children>
@@ -94,9 +89,17 @@
                 <Image url="@../../../images/check.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="200.0" fitWidth="298.0" layoutX="32.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: 2000;">
+        <ImageView fitHeight="200.0" fitWidth="298.0" layoutX="32.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: 2000;">
             <image>
                 <Image url="@../../../images/status4.png" />
+            </image>
+            <clip>
+                <Rectangle arcHeight="30.0" arcWidth="30.0" height="200.0" width="298.0" />
+            </clip>
+        </ImageView>
+        <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/left-arrow.png" />
             </image>
         </ImageView>
     </children>

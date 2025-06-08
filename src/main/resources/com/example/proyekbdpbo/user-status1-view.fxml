@@ -19,8 +19,12 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dde1d5" height="40.0" layoutX="289.0" layoutY="72.0" stroke="#9e9289" strokeType="INSIDE" width="40.0" />
       <ImageView fitHeight="200.0" fitWidth="298.0" layoutX="33.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/status1.png" />
-         </image></ImageView>
+            <Image url="@../../../images/status0.png" />
+         </image>
+          <clip>
+              <Rectangle width="298.0" height="200.0" arcWidth="30.0" arcHeight="30.0" />
+          </clip>
+      </ImageView>
       <Text layoutX="34.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting Confirmation">
          <font>
             <Font name="Segoe UI" size="20.0" />

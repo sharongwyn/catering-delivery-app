@@ -21,7 +21,11 @@
         <ImageView fitHeight="203.0" fitWidth="300.0" layoutX="32.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/status3.png" />
-         </image></ImageView>
+         </image>
+            <clip>
+                <Rectangle width="298.0" height="200.0" arcWidth="30.0" arcHeight="30.0" />
+            </clip>
+        </ImageView>
         <Text layoutX="30.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Out for Delivery">
             <font>
                 <Font name="Segoe UI" size="20.0" />
@@ -75,5 +79,10 @@
             <Image url="@../../../images/fast-delivery.png" />
          </image>
       </ImageView>
+        <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/left-arrow.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>
