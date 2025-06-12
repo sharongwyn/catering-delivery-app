@@ -78,32 +78,60 @@ public class homeController {
 
     private void showMenus(ArrayList<menu> menus) {
         // Kosongkan HBox dulu
-        menuRec.getChildren().clear();
+        for (int i = 0; i < menus.size(); i++) {
+            menu m = menus.get(i);
+            String menuName = m.getName(); // nama menu dari database
+            String imageFileName = m.getImagePath(); // nama file gambar dari database
 
-        for (menu m : menus) {
-            VBox menuBox = new VBox();
-            menuBox.setPrefSize(200, 145);
-            menuBox.setSpacing(5);
-
-            ImageView imageView = new ImageView();
-            imageView.setFitHeight(140);
-            imageView.setFitWidth(200);
-            imageView.setPreserveRatio(true);
-
+            // Load gambar
+            Image image = null;
             try {
-                imageView.setImage(new Image(getClass().getResourceAsStream("/images/" + m.getImagePath())));
-
+                String imagePath = getClass().getResource("/images/" + imageFileName).toExternalForm();
+                image = new Image(imagePath);
             } catch (Exception e) {
-                System.out.println("Gagal load image: " + m.getImagePath());
+                System.out.println("Gagal load gambar: " + imageFileName);
+                e.printStackTrace();
             }
 
-            Label nameLabel = new Label(m.getName());
-            nameLabel.setPrefSize(200, 36);
-            nameLabel.setStyle("-fx-font-size: 16px; -fx-font-family: 'Arial Rounded MT Bold';");
-
-            menuBox.getChildren().addAll(imageView, nameLabel);
-            menuRec.getChildren().add(menuBox);
+            if (i == 0) {
+                menu1name.setText(menuName);
+                if (image != null) menu1image.setImage(image);
+            } else if (i == 1) {
+                menu2name.setText(menuName);
+                if (image != null) menu2image.setImage(image);
+            } else if (i == 2) {
+                menu3name.setText(menuName);
+                if (image != null) menu3image.setImage(image);
+            }
         }
+
+
+//        menuRec.getChildren().clear();
+//
+//        for (menu m : menus) {
+//            VBox menuBox = new VBox();
+//            menuBox.setPrefSize(200, 145);
+//            menuBox.setSpacing(5);
+//
+//            ImageView imageView = new ImageView();
+//            imageView.setFitHeight(140);
+//            imageView.setFitWidth(200);
+//            imageView.setPreserveRatio(true);
+//
+//            try {
+//                imageView.setImage(new Image(getClass().getResourceAsStream("/images/" + m.getImagePath())));
+//
+//            } catch (Exception e) {
+//                System.out.println("Gagal load image: " + m.getImagePath());
+//            }
+//
+//            Label nameLabel = new Label(m.getName());
+//            nameLabel.setPrefSize(200, 36);
+//            nameLabel.setStyle("-fx-font-size: 16px; -fx-font-family: 'Arial Rounded MT Bold';");
+//
+//            menuBox.getChildren().addAll(imageView, nameLabel);
+//            menuRec.getChildren().add(menuBox);
+//        }
 
 
 
