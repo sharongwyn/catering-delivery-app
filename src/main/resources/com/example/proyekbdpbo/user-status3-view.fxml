@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -13,76 +14,86 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: #FFFCF7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.status3Controller">
     <children>
-        <Line endX="131.0" endY="7.62939453125E-6" layoutX="158.0" layoutY="92.0" startX="-86.0" startY="7.62939453125E-6" stroke="#333333" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a3b18a" height="40.0" layoutX="32.0" layoutY="72.0" stroke="#3e2c23" strokeType="INSIDE" width="40.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a3b18a" height="40.0" layoutX="118.0" layoutY="72.0" stroke="#3e2c23" strokeType="INSIDE" width="40.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a3b18a" height="40.0" layoutX="205.0" layoutY="72.0" stroke="#3e2c23" strokeType="INSIDE" width="40.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a2b0897e" height="40.0" layoutX="289.0" layoutY="72.0" stroke="#8a5d3d81" strokeType="INSIDE" width="40.0" />
-        <ImageView fitHeight="203.0" fitWidth="300.0" layoutX="32.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/status3.png" />
-         </image>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff5e1" height="234.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="360.0" />
+        <Line endX="131.0" endY="7.62939453125E-6" layoutX="158.0" layoutY="176.0" startX="-86.0" startY="7.62939453125E-6" stroke="#333333" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a3b18a" height="40.0" layoutX="32.0" layoutY="156.0" stroke="#3e2c23" strokeType="INSIDE" width="40.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a3b18a" height="40.0" layoutX="118.0" layoutY="156.0" stroke="#3e2c23" strokeType="INSIDE" width="40.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a3b18a" height="40.0" layoutX="205.0" layoutY="156.0" stroke="#3e2c23" strokeType="INSIDE" width="40.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dde1d5" height="40.0" layoutX="289.0" layoutY="156.0" stroke="#9e9289" strokeType="INSIDE" width="40.0" />
+        <ImageView fitHeight="200.0" fitWidth="439.0" layoutX="31.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/status3.png" />
+            </image>
             <clip>
-                <Rectangle width="298.0" height="200.0" arcWidth="30.0" arcHeight="30.0" />
+                <Rectangle arcHeight="30.0" arcWidth="30.0" height="200.0" width="298.0" />
             </clip>
         </ImageView>
-        <Text layoutX="30.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Out for Delivery">
+        <Text layoutX="31.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivering your Order">
             <font>
-                <Font name="Segoe UI" size="20.0" />
+                <Font name="Arial Black" size="20.0" />
             </font>
         </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e1e1" height="47.0" layoutX="28.0" layoutY="445.0" stroke="BLACK" strokeType="INSIDE" width="306.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffcf7" height="163.0" layoutX="28.0" layoutY="482.0" stroke="BLACK" strokeType="INSIDE" width="306.0" />
-      <Circle fill="#d7a86e" layoutX="86.0" layoutY="543.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="42.0" layoutY="599.0" text="Delivery Staff Name">
-         <font>
-            <Font name="Segoe UI" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="176.0" layoutY="531.0" text="Car/Motorbike Name">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="195.0" layoutY="502.0" text="Plate Number">
-         <font>
-            <Font name="Segoe UI" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="41.0" layoutY="455.0" text="Estimated delivery time">
-         <font>
-            <Font name="Segoe UI" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="259.0" layoutY="453.0" text="30 min">
-         <font>
-            <Font name="Segoe UI Bold" size="18.0" />
-         </font>
-      </Label>
-      <Button layoutX="225.0" layoutY="593.0" mnemonicParsing="false" style="-fx-background-color: #A3B18A; -fx-border-color: #3E2C23; -fx-background-radius: 12; -fx-border-radius: 12;" text="Chat Driver" textFill="WHITE">
-         <font>
-            <Font name="Segoe UI Bold" size="14.0" />
-         </font>
-      </Button>
-        <ImageView fitHeight="29.0" fitWidth="20.0" layoutX="42.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="29.0" fitWidth="20.0" layoutX="42.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/hourglass.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="29.0" fitWidth="20.0" layoutX="128.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/hot-pot.png" />
-            </image>
-        </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="213.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/fast-delivery.png" />
-         </image>
-      </ImageView>
         <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/left-arrow.png" />
             </image>
         </ImageView>
+        <ImageView fitHeight="29.0" fitWidth="20.0" layoutX="128.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/hot-pot.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="32.0" layoutY="104.0" prefHeight="18.0" prefWidth="162.0" text="Estimated Delivery Time" />
+        <Label layoutX="32.0" layoutY="121.0" prefHeight="18.0" prefWidth="176.0" text="&lt;estimation time&gt;">
+            <font>
+                <Font size="13.0" />
+            </font></Label>
+      <Group layoutX="26.0" layoutY="486.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e1e1" height="47.0" layoutY="2.0" stroke="BLACK" strokeType="INSIDE" width="306.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffcf7" height="150.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="306.0" />
+            <Circle fill="#d7a86e" layoutX="55.0" layoutY="103.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="14.0" layoutY="157.0" text="Delivery Staff Name">
+               <font>
+                  <Font name="Segoe UI" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="148.0" layoutY="96.0" text="Car/Motorbike Name">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="167.0" layoutY="67.0" text="Plate Number">
+               <font>
+                  <Font name="Segoe UI" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="14.0" text="Estimated delivery time">
+               <font>
+                  <Font name="Segoe UI" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="231.0" layoutY="12.0" text="30 min">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="197.0" layoutY="148.0" mnemonicParsing="false" style="-fx-background-color: #A3B18A; -fx-border-color: #3E2C23; -fx-background-radius: 12; -fx-border-radius: 12;" text="Chat Driver" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+      <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="212.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/fast-delivery.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
