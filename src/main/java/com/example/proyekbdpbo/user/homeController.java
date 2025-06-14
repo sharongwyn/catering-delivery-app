@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.awt.*;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,6 +44,7 @@ public class homeController {
 
     @FXML
     public void initialize() {
+
         userloggedin = new user("desi123", "desi");
         titleHomeView.setText("Hi " + userloggedin.getNama() + "!");
 
@@ -63,6 +65,7 @@ public class homeController {
 //
 //        selectBranch.getItems().addAll(branch1, branch2);
 
+
         selectBranch.setOnAction(e -> {
             branchwithmenus selected = selectBranch.getValue();
             if (selected != null) {
@@ -72,11 +75,17 @@ public class homeController {
         });
 
         // ✨ Tampilkan menu dari database ke ScrollPane/HBox
-        showMenusFromDB();
+        //showMenusFromDB();
 
     }
 
     private void showMenus(ArrayList<menu> menus) {
+        menu1name.setText("");
+        menu1image.setImage(null);
+        menu2name.setText("");
+        menu2image.setImage(null);
+        menu3name.setText("");
+        menu3image.setImage(null);
         // Kosongkan HBox dulu
         for (int i = 0; i < menus.size(); i++) {
             menu m = menus.get(i);
@@ -86,8 +95,15 @@ public class homeController {
             // Load gambar
             Image image = null;
             try {
-                String imagePath = getClass().getResource("/images/" + imageFileName).toExternalForm();
-                image = new Image(imagePath);
+                URL resourceUrl = getClass().getResource("/images/" + imageFileName);
+                if (resourceUrl != null) {
+                    String imagePath = resourceUrl.toExternalForm();
+                    image = new Image(imagePath);
+                } else {
+                    System.out.println("❌ Gambar tidak ditemukan: " + imageFileName);
+                }
+//                String imagePath = getClass().getResource("/images/" + imageFileName).toExternalForm();
+//                image = new Image(imagePath);
             } catch (Exception e) {
                 System.out.println("Gagal load gambar: " + imageFileName);
                 e.printStackTrace();

@@ -6,11 +6,12 @@ public class menu {
 
     public menu(String name, String imageFileName) {
         this.name = name;
-        var url = getClass().getResource("/images/" + imageFileName);
-        if (url == null) {
-            throw new RuntimeException("Gambar tidak ditemukan: " + imageFileName);
-        }
-        this.imagePath = url.toExternalForm();
+//        var url = getClass().getResource("/images/" + imageFileName);
+//        if (url == null) {
+//            throw new RuntimeException("Gambar tidak ditemukan: " + imageFileName);
+//        }
+//        this.imagePath = url.toExternalForm();
+        this.imagePath = imageFileName;
 
     }
 
