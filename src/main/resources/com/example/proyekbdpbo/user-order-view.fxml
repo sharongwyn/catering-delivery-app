@@ -5,14 +5,12 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: #FFFCF7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.orderController">
@@ -267,17 +265,13 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <StackPane fx:id="cart" layoutX="262.0" layoutY="545.0" prefHeight="72.0" prefWidth="77.0">
+      <StackPane fx:id="cart" layoutX="239.0" layoutY="545.0" prefHeight="72.0" prefWidth="97.0">
          <children>
-            <Circle fx:id="cartCircle" fill="#665337" radius="36.0" stroke="#665337" strokeType="INSIDE" />
-            <ImageView fx:id="cartImage" fitHeight="57.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/shopping-cart.png" />
-               </image>
-               <effect>
-                  <ColorAdjust brightness="1.0" contrast="-0.01" />
-               </effect>
-            </ImageView>
+            <Button fx:id="cartButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: #665337;" text="View Cart" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
          </children>
       </StackPane>
    </children>

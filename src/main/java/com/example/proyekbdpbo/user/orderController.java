@@ -4,12 +4,17 @@ import com.example.proyekbdpbo.database.DatabaseConnection;
 import com.example.proyekbdpbo.model.branchwithmenus;
 import com.example.proyekbdpbo.model.menu;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +34,8 @@ public class orderController {
     @FXML
     private Button r1m1view, r1m2view, r2m1view, r2m2view, r3m1view, r3m2view;
 
-
+    @FXML
+    private Button cartButton;
 
     @FXML
     public void initialize() {
@@ -45,6 +51,16 @@ public class orderController {
                 showMenus(selected.getMenus());
             }
         });
+
+        // Set action semua tombol view
+        r1m1view.setOnAction(e -> handleMenuView(0));
+        r1m2view.setOnAction(e -> handleMenuView(1));
+        r2m1view.setOnAction(e -> handleMenuView(2));
+        r2m2view.setOnAction(e -> handleMenuView(3));
+        r3m1view.setOnAction(e -> handleMenuView(4));
+        r3m2view.setOnAction(e -> handleMenuView(5));
+
+        cartButton.setOnAction(e -> handleViewCart());
 
     }
 
@@ -86,8 +102,9 @@ public class orderController {
                 String menuName = rs.getString("name");
                 String image = rs.getString("image_path");
                 double price = rs.getDouble("price");
+                String description = rs.getString("description");
 
-                menu m = new menu(menuName, image, price);
+                menu m = new menu(menuName, image, price, description);
                 branch.addMenu(m);
             }
 
@@ -136,6 +153,47 @@ public class orderController {
         } catch (Exception e) {
             System.out.println("Error loading image: " + fileName);
             return null;
+        }
+    }
+
+
+    private void handleMenuView(int index) {
+        branchwithmenus selected = selectBranch.getValue();
+        if (selected != null && selected.getMenus().size() > index) {
+            menu m = selected.getMenus().get(index);
+            openMenuDetailWindow(m);
+        }
+    }
+
+    private void openMenuDetailWindow(menu m) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-order-permenu-view.fxml"));
+            Parent root = loader.load();
+            permenuController controller = loader.getController();
+            controller.setMenu(m); // jika kamu passing data
+
+//            permenuController controller = loader.getController();
+//            controller.setMenu(m);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Menu Detail");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleViewCart() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-cart-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Your Cart");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

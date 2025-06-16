@@ -53,7 +53,7 @@
                         <TextField fx:id="quantityField" prefHeight="25.0" prefWidth="130.0" />
                      </children>
                   </HBox>
-                  <Button fx:id="addcartButton" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-background-color: #665337;" text="ADD TO CART" textFill="WHITE">
+                  <Button fx:id="addcartButton" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-background-color: #665337;" text="ADD TO CART" textFill="WHITE" >
                      <VBox.margin>
                         <Insets left="95.0" top="25.0" />
                      </VBox.margin>
@@ -65,6 +65,6 @@
             </VBox>
          </children>
       </HBox>
-      <Button layoutX="22.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
+      <Button fx:id="backButton" layoutX="22.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ module com.example.proyekbdpbo {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires jdk.jdi;
 
 
     opens com.example.proyekbdpbo to javafx.fxml;

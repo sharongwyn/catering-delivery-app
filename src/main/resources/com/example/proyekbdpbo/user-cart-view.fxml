@@ -94,7 +94,7 @@
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Label>
-            <ChoiceBox prefHeight="17.0" prefWidth="132.0" style="-fx-background-color: #FFF5E1;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="selectPayment" prefHeight="17.0" prefWidth="132.0" style="-fx-background-color: #FFF5E1;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="subtotalPrice" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="92.0" text="&lt;subtotal&gt;" GridPane.columnIndex="1" />
             <Label fx:id="discount" text="&lt;discount&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="deliveryCharge" text="&lt;delivery charge&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
