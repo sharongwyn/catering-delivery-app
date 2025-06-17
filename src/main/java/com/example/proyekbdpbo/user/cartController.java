@@ -34,12 +34,23 @@ public class cartController {
     private final double DISCOUNT_PERCENT = 0.2;
     private final double DELIVERY_CHARGE = 0.0;
 
+    @FXML
+    public void initialize() {
+
+    }
+
     public void setupCart() {
         cartItems = cartstorage.getItems();
 
         itemCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+//        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        priceCol.setCellValueFactory(cellData -> {
+            cartitem item = cellData.getValue();
+            double totalPrice = item.getPrice() * item.getQuantity();
+            return new javafx.beans.property.ReadOnlyObjectWrapper<>(totalPrice);
+        });
 
         orderTable.setItems(cartItems);
 
@@ -120,6 +131,7 @@ public class cartController {
                 psDetail.addBatch();
             }
             psDetail.executeBatch();
+
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -5,6 +5,7 @@ public class menu {
     private String imagePath;
     private double price;
     private String description;
+    private String branch;
 
     public menu(String name, String imageFileName) {
         this.name = name;
@@ -54,5 +55,13 @@ public class menu {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 }

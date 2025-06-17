@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class cartstorage {
+    private static String currentBranch = null;
     private static final ObservableList<cartitem> cartList = FXCollections.observableArrayList();
 
     public static ObservableList<cartitem> getCartList() {
@@ -29,4 +30,11 @@ public class cartstorage {
         return cartList;
     }
 
+    public static String getCurrentBranch() {
+        return currentBranch;
+    }
+
+    public static void setCurrentBranch(String currentBranch) {
+        cartstorage.currentBranch = currentBranch;
+    }
 }

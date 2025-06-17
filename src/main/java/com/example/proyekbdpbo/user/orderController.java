@@ -42,6 +42,16 @@ public class orderController {
         ArrayList<branchwithmenus> branchList = getBranchesFromDB();
         selectBranch.getItems().addAll(branchList);
 
+        if (!branchList.isEmpty()) {
+            selectBranch.setValue(branchList.get(0)); // default pilih Surabaya (index 0)
+
+            branchwithmenus selected = selectBranch.getValue();
+            if (selected != null) {
+                loadMenusForBranch(selected); // agar menus terisi
+                showMenus(selected.getMenus()); // tampilkan menunya
+            }
+        }
+
         // Listener saat user memilih branch
         selectBranch.setOnAction(event -> {
             branchwithmenus selected = selectBranch.getValue();
@@ -188,6 +198,11 @@ public class orderController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-cart-view.fxml"));
             Parent root = loader.load();
+
+            // Ambil controllernya
+            cartController controller = loader.getController();
+            controller.setupCart();  // <-- panggil ini!
+
             Stage stage = new Stage();
             stage.setTitle("Your Cart");
             stage.setScene(new Scene(root));

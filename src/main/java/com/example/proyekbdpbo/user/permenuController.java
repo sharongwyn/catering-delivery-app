@@ -5,6 +5,7 @@ import com.example.proyekbdpbo.model.cartstorage;
 import com.example.proyekbdpbo.model.menu;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -59,6 +60,9 @@ public class permenuController {
     }
 
     private void handleAddToCart() {
+//        String currentBranch = cartstorage.getCurrentBranch();
+//        String selectedBranch = getSelectedBranchFromUI(); // ambil dari UI ComboBox atau yang dipilih user
+
         if (currentMenu == null) return;
 
         String qtyText = quantityField.getText().trim();
@@ -68,16 +72,48 @@ public class permenuController {
             int quantity = Integer.parseInt(qtyText);
             if (quantity <= 0) return;
 
+            String currentBranch = cartstorage.getCurrentBranch();
+            String menuBranch = currentMenu.getBranch(); // di class menu
+
+            // Validasi: jika cart sudah berisi item dari cabang lain
+            if (currentBranch != null && !currentBranch.equals(menuBranch)) {
+                showAlert2("Cart must be from the same branch. Clear cart first if you want to switch branch..");
+                return;
+            }
+
+            // Kalau belum ada cabang di cart, artinya cart kosong → set cabang awal
+            if (currentBranch == null) {
+                cartstorage.setCurrentBranch(menuBranch);
+            }
+
             cartitem item = new cartitem(currentMenu.getName(), quantity, currentMenu.getPrice());
             cartstorage.addItem(item);
             quantityField.clear();
+            showAlert("Item successfully added to cart!");
         } catch (NumberFormatException e) {
-            System.out.println("Input kuantitas tidak valid.");
+            System.out.println("Quantity value is not valid!");
+            showAlert2("Quantity value is not valid!");
         }
     }
 
     private void handleBack(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.close(); // karena tadi dipanggil pakai new Stage(), tinggal ditutup saja
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showAlert2(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

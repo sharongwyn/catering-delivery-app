@@ -5,6 +5,7 @@ public class cartitem {
     private int quantity;
     private double price;
 
+
     public cartitem(String name, int quantity, double price) {
         this.name = name;
         this.quantity = quantity;

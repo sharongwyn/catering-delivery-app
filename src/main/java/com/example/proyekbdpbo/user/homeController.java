@@ -51,19 +51,16 @@ public class homeController {
         ArrayList<branchwithmenus> branchList = getBranchesFromDB();
         selectBranch.getItems().addAll(branchList);
 
-//        branchwithmenus branch1 = new branchwithmenus("branch A");
-//        branchwithmenus branch2 = new branchwithmenus("branch B");
-//
-//        branch1.addMenu(new menu("Ayam geprek", "box.png"));
-//        branch1.addMenu(new menu("Nasi goreng", "performance.png"));
-//        branch1.addMenu(new menu("Air putih", "box.png"));
-//
-//        branch2.addMenu(new menu("Mie ayam", "marketing.png"));
-//        branch2.addMenu(new menu("Air putih", "store.png"));
-//        branch2.addMenu(new menu("Nasi lemak", "box.png"));
-//
-//
-//        selectBranch.getItems().addAll(branch1, branch2);
+        if (!branchList.isEmpty()) {
+            selectBranch.setValue(branchList.get(0)); // otomatis pilih Surabaya (index 0)
+
+            // Ambil dan tampilkan menu dari Surabaya
+            branchwithmenus selected = selectBranch.getValue();
+            if (selected != null) {
+                ArrayList<menu> menus = getMenusByBranchId(selected.getId());
+                showMenus(menus);
+            }
+        }
 
 
         selectBranch.setOnAction(e -> {
@@ -74,8 +71,6 @@ public class homeController {
             }
         });
 
-        // ✨ Tampilkan menu dari database ke ScrollPane/HBox
-        //showMenusFromDB();
 
     }
 
