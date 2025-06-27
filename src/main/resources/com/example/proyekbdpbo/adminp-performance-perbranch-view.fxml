@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: #FFFCF7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.adminPusat.performanceperbranchController">
+<AnchorPane prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: #FFFCF7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.adminPusat.performancebranchController">
    <children>
       <Pane prefHeight="267.0" prefWidth="360.0" style="-fx-background-color: #FFF5E1;">
          <children>
@@ -74,7 +74,7 @@
          <children>
             <VBox fx:id="review1" prefHeight="102.0" prefWidth="268.0" style="-fx-border-color: black;">
                <children>
-                  <Label fx:id="r1username" prefHeight="35.0" prefWidth="307.0" text="&lt;username&gt;" VBox.vgrow="NEVER">
+                  <Label fx:id="r1idpelanggan" prefHeight="35.0" prefWidth="307.0" text="&lt;id_pelanggan&gt;" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" />
                      </VBox.margin>
@@ -94,7 +94,7 @@
             </VBox>
             <VBox fx:id="review2" prefHeight="102.0" prefWidth="302.0" style="-fx-border-color: black;">
                <children>
-                  <Label fx:id="r2username" prefHeight="36.0" prefWidth="305.0" text="&lt;username&gt;" VBox.vgrow="NEVER">
+                  <Label fx:id="r2idpelanggan" prefHeight="36.0" prefWidth="305.0" text="&lt;id_pelanggan&gt;" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" />
                      </VBox.margin>
@@ -114,10 +114,13 @@
             </VBox>
             <VBox fx:id="review3" prefHeight="102.0" prefWidth="302.0" style="-fx-border-color: black;">
                <children>
-                  <Label fx:id="r3username" prefHeight="36.0" prefWidth="305.0" text="&lt;username&gt;" VBox.vgrow="NEVER">
+                  <Label fx:id="r3idpelanggan" prefHeight="36.0" prefWidth="305.0" text="&lt;id_pelanggan&gt;" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Label>
                   <Label fx:id="r3review" alignment="TOP_LEFT" prefHeight="66.0" prefWidth="318.0" text="&lt;review&gt;" VBox.vgrow="NEVER">
                      <VBox.margin>
