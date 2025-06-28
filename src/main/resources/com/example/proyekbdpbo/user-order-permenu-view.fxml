@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: #FFF5E1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.permenuController">
+   <children>
+      <ImageView fx:id="itemimage" fitHeight="187.0" fitWidth="313.0" layoutX="24.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox layoutX="28.0" layoutY="279.0" prefHeight="270.0" prefWidth="305.0">
+         <children>
+            <VBox prefHeight="270.0" prefWidth="308.0" spacing="2.0">
+               <children>
+                  <HBox prefHeight="132.0" prefWidth="258.0">
+                     <children>
+                        <VBox prefHeight="132.0" prefWidth="223.0">
+                           <children>
+                              <Label fx:id="itemname" prefHeight="37.0" prefWidth="208.0" text="&lt;menu name&gt;">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="itemdesc" alignment="TOP_LEFT" prefHeight="112.0" prefWidth="194.0" text="&lt;description&gt; " wrapText="true" />
+                           </children>
+                        </VBox>
+                        <Label fx:id="itemprice" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="112.0" text="&lt;price&gt;">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="69.0" prefWidth="305.0">
+                     <children>
+                        <VBox prefHeight="100.0" prefWidth="208.0">
+                           <children>
+                              <Label prefHeight="16.0" prefWidth="159.0" text="Quantity">
+                                 <font>
+                                    <Font name="Berlin Sans FB" size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="4.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <TextField fx:id="quantityField" prefHeight="25.0" prefWidth="130.0" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="addcartButton" alignment="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="101.0" style="-fx-background-color: #665337;" text="ADD TO CART" textFill="WHITE" >
+                     <VBox.margin>
+                        <Insets left="95.0" top="25.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button fx:id="backButton" layoutX="22.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
+   </children>
+</AnchorPane>
