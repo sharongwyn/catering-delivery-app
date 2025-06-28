@@ -3,10 +3,11 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -38,7 +39,7 @@
                 <Image url="@../../../images/hourglass.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="backBtn" fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/left-arrow.png" />
             </image>
@@ -49,7 +50,7 @@
             </image>
         </ImageView>
         <Label layoutX="32.0" layoutY="104.0" prefHeight="18.0" prefWidth="162.0" text="Estimated Delivery Time" />
-        <Label layoutX="32.0" layoutY="121.0" prefHeight="18.0" prefWidth="176.0" text="&lt;estimation time&gt;">
+        <Label fx:id="estimationTime" layoutX="32.0" layoutY="121.0" prefHeight="18.0" prefWidth="176.0" text="&lt;estimation time&gt;">
             <font>
                 <Font size="13.0" />
             </font></Label>
@@ -57,30 +58,14 @@
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1e1e1" height="47.0" layoutY="2.0" stroke="BLACK" strokeType="INSIDE" width="306.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffcf7" height="150.0" layoutY="47.0" stroke="BLACK" strokeType="INSIDE" width="306.0" />
-            <Circle fill="#d7a86e" layoutX="55.0" layoutY="103.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="14.0" layoutY="157.0" text="Delivery Staff Name">
+            <Label fx:id="namaStaffLabel" layoutX="14.0" layoutY="157.0" text="Delivery Staff Name">
                <font>
-                  <Font name="Segoe UI" size="16.0" />
+                  <Font name="Segoe UI Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="148.0" layoutY="96.0" text="Car/Motorbike Name">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="167.0" layoutY="67.0" text="Plate Number">
-               <font>
-                  <Font name="Segoe UI" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="13.0" layoutY="14.0" text="Estimated delivery time">
+            <Label layoutX="23.0" layoutY="14.0" text="Our driver is coming to you soon!">
                <font>
                   <Font name="Segoe UI" size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="231.0" layoutY="12.0" text="30 min">
-               <font>
-                  <Font name="Segoe UI Bold" size="18.0" />
                </font>
             </Label>
             <Button layoutX="197.0" layoutY="148.0" mnemonicParsing="false" style="-fx-background-color: #A3B18A; -fx-border-color: #3E2C23; -fx-background-radius: 12; -fx-border-radius: 12;" text="Chat Driver" textFill="WHITE">
@@ -88,6 +73,28 @@
                   <Font name="Segoe UI Bold" size="14.0" />
                </font>
             </Button>
+            <VBox layoutX="126.0" layoutY="65.0" prefHeight="65.0" prefWidth="179.0" spacing="5.0" style="-fx-alignment: to;">
+               <children>
+                  <Label fx:id="platNomorLabel" text="Plate Number">
+                     <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="jenisKendaraanLabel" text="Car/Motorbike Name">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <ImageView fitHeight="84.0" fitWidth="94.0" layoutX="14.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: shadow;">
+               <image>
+                  <Image url="@../../../images/profile.png" />
+               </image>
+                <effect>
+                    <DropShadow color="black" offsetX="2" offsetY="2" radius="5" />
+                </effect>
+            </ImageView>
          </children>
       </Group>
       <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="212.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">

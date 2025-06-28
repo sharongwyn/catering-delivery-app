@@ -38,13 +38,13 @@
                 <Image url="@../../../images/hourglass.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="backBtn" fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/left-arrow.png" />
             </image>
         </ImageView>
         <Label layoutX="32.0" layoutY="104.0" prefHeight="18.0" prefWidth="162.0" text="Estimated Delivery Time" />
-        <Label layoutX="32.0" layoutY="121.0" prefHeight="18.0" prefWidth="176.0" text="&lt;estimation time&gt;">
+        <Label fx:id="estimationTime" layoutX="32.0" layoutY="121.0" prefHeight="18.0" prefWidth="176.0" text="&lt;estimation time&gt;">
          <font>
             <Font size="13.0" />
          </font></Label>
@@ -55,12 +55,12 @@
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <TableView prefHeight="200.0" prefWidth="298.0" style="-fx-background-color: #FFFCF7; -fx-border-color: #3E2C23;">
+                <TableView fx:id="orderTable" prefHeight="200.0" prefWidth="298.0" style="-fx-background-color: #FFFCF7; -fx-border-color: #3E2C23;">
                     <columns>
-                        <TableColumn prefWidth="32.0" style="-fx-background-color: #D7A86E" text="No" />
-                        <TableColumn prefWidth="119.199951171875" style="-fx-background-color: #D7A86E" text="Menu Name" />
-                        <TableColumn prefWidth="57.60003662109375" style="-fx-background-color: #D7A86E" text="Quantity" />
-                        <TableColumn prefWidth="92.79998779296875" style="-fx-background-color: #D7A86E" text="Price" />
+                        <TableColumn fx:id="colNo" prefWidth="32.0" text="No" />
+                        <TableColumn fx:id="colMenu" prefWidth="119.199951171875" text="Menu Name" />
+                        <TableColumn fx:id="colQuantity" prefWidth="57.60003662109375" text="Quantity" />
+                        <TableColumn fx:id="colPrice" prefWidth="92.79998779296875" text="Price" />
                     </columns>
                 </TableView>
             </children>

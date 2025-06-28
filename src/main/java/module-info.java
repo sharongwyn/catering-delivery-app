@@ -9,6 +9,10 @@ module com.example.proyekbdpbo {
     opens com.example.proyekbdpbo.adminPusat to javafx.fxml;
     opens com.example.proyekbdpbo.adminCabang to javafx.fxml;
     opens com.example.proyekbdpbo.database to javafx.fxml;
+    opens com.example.proyekbdpbo.model to javafx.base;
+    opens com.example.proyekbdpbo.utils to javafx.base;
+
+
 
     exports com.example.proyekbdpbo;
     exports com.example.proyekbdpbo.user;

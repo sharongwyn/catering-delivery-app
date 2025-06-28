@@ -30,7 +30,7 @@
                 <Rectangle arcHeight="30.0" arcWidth="30.0" height="200.0" width="298.0" />
             </clip>
         </ImageView>
-        <Text layoutX="31.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oder Delivered">
+        <Text layoutX="31.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Delivered">
             <font>
                 <Font name="Arial Black" size="20.0" />
             </font>
@@ -40,7 +40,7 @@
                 <Image url="@../../../images/hourglass.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="backBtn" fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/left-arrow.png" />
             </image>
@@ -61,36 +61,36 @@
                 <Font size="13.0" />
             </font></Label>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffcf7" height="200.0" layoutX="32.0" layoutY="489.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
-        <VBox alignment="CENTER" layoutX="62.0" layoutY="501.0" spacing="15.0">
+        <VBox alignment="CENTER" layoutX="62.0" layoutY="505.0" spacing="12.0">
             <children>
-                <Label text="Branch#">
+                <Label text="Rate Our Branch!">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Label>
                 <HBox prefHeight="29.0" prefWidth="190.0">
                     <children>
-                        <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="star1" fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/star_empty.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="star2" fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/star_empty.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="star3" fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/star_empty.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="star4" fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/star_empty.png" />
                             </image>
                         </ImageView>
-                        <ImageView fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="star5" fitHeight="41.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/star_empty.png" />
                             </image>
@@ -100,15 +100,27 @@
                         <Insets left="15.0" right="15.0" />
                     </VBox.margin>
                 </HBox>
-                <TextField prefHeight="26.0" prefWidth="238.0" promptText="Enter your review (optional)" />
-                <Button mnemonicParsing="false" style="-fx-background-color: #A3B18A; -fx-border-color: #3E2C23; -fx-background-radius: 15; -fx-border-radius: 15;" text="Submit" textFill="WHITE">
-                    <font>
+                <TextField fx:id="reviewInput" prefHeight="26.0" prefWidth="238.0" promptText="Enter your review (optional)" />
+            <HBox prefHeight="37.0" prefWidth="238.0" spacing="20.0" style="-fx-alignment: center;">
+               <children>
+                      <Button fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmitBranchRating" style="-fx-background-color: #A3B18A; -fx-border-color: #3E2C23; -fx-background-radius: 15; -fx-border-radius: 15;" text="Submit" textFill="WHITE">
+                          <font>
+                              <Font name="Segoe UI Bold" size="13.0" />
+                          </font>
+                          <padding>
+                              <Insets bottom="4.0" left="12.0" right="12.0" top="4.0" />
+                          </padding>
+                      </Button>
+                  <Button fx:id="skipButton" mnemonicParsing="false" onAction="#handleSkipButton" style="-fx-background-color: #A98467; -fx-border-color: #3E2C23; -fx-background-radius: 15; -fx-border-radius: 15;" text="Skip" textFill="WHITE">
+                     <font>
                         <Font name="Segoe UI Bold" size="13.0" />
-                    </font>
-                    <padding>
+                     </font>
+                     <padding>
                         <Insets bottom="4.0" left="12.0" right="12.0" top="4.0" />
-                    </padding>
-                </Button>
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
             </children>
         </VBox>
         <ImageView fitHeight="29.0" fitWidth="22.0" layoutX="298.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">

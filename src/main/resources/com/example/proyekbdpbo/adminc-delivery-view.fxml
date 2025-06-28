@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.adminCabang.deliveryController">
+<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: #FFFCF7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.adminCabang.deliveryController">
    <children>
       <HBox layoutY="630.0" prefHeight="90.0" prefWidth="334.0" spacing="68.0" style="-fx-background-color: #FFF5E1;">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="menuIcon" fitHeight="48.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/store.png" />
                </image>
@@ -18,12 +27,12 @@
                   <Insets top="3.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="verifIcon" fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/checklist.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="deliveryIcon" fitHeight="61.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/box.png" />
                </image>
@@ -33,5 +42,51 @@
             <Insets bottom="20.0" left="44.0" right="44.0" top="20.0" />
          </padding>
       </HBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff5e1" height="134.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="360.0" />
+      <Label layoutX="31.0" layoutY="78.0" text="Schedule Delivery">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="filterDatePicker" layoutX="62.0" layoutY="161.0" />
+      <Label layoutX="22.0" layoutY="164.0" text="Date">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="24.0" layoutY="211.0" prefHeight="317.0" prefWidth="312.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="303.0" prefWidth="574.0">
+               <children>
+                  <TableView fx:id="deliveryTable" prefHeight="320.0" prefWidth="574.0" style="-fx-background-color: #FFFCF7; -fx-border-color: #3E2C23;">
+                    <columns>
+                      <TableColumn fx:id="colId" prefWidth="36.800048828125" text="ID" />
+                        <TableColumn fx:id="colStaffName" prefWidth="132.79998779296875" text="Staff Name" />
+                        <TableColumn fx:id="colJenis" prefWidth="112.800048828125" text="Vehicle Type" />
+                        <TableColumn fx:id="colPlat" prefWidth="112.800048828125" text="Plate Number" />
+                      <TableColumn fx:id="colJam" prefWidth="66.39996337890625" text="Time" />
+                        <TableColumn fx:id="colEstimasi" prefWidth="110.4000244140625" text="Estimated Arrival" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <VBox layoutX="180.0" layoutY="406.0" prefHeight="146.0" prefWidth="140.0" spacing="15.0" style="-fx-alignment: center;" />
+      <Button fx:id="addDeliveryButton" layoutX="23.0" layoutY="559.0" mnemonicParsing="false" onAction="#handleAddDelivery" style="-fx-border-color: #3E2C23; -fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: #7B5E57;" text="Add Delivery" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="updateDeliveryButton" layoutX="140.0" layoutY="559.0" mnemonicParsing="false" onAction="#handleUpdateDelivery" style="-fx-background-radius: 5; -fx-border-color: #3E2C23; -fx-border-radius: 5; -fx-background-color: #7B5E57;" text="Update Delivery" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteDeliveryButton" layoutX="276.0" layoutY="559.0" mnemonicParsing="false" onAction="#handleDeleteDelivery" style="-fx-border-color: #3E2C23; -fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: #7B5E57;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Bold" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
