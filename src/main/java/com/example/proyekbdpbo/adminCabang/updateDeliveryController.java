@@ -24,7 +24,7 @@ public class updateDeliveryController {
     @FXML private TextField deliveryTimeField;
     @FXML private TextField estimatedArrivalField;
     @FXML private Button updateDeliveryButton;
-    @FXML private ImageView backBtn;
+    @FXML private Button backBtn;
 
     private int deliveryId;
 

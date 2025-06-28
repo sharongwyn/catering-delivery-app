@@ -40,11 +40,6 @@
                 <Image url="@../../../images/hourglass.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="backBtn" fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../images/left-arrow.png" />
-            </image>
-        </ImageView>
         <ImageView fitHeight="29.0" fitWidth="20.0" layoutX="128.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../images/hot-pot.png" />
@@ -128,5 +123,6 @@
                 <Image url="@../../../images/check.png" />
             </image>
         </ImageView>
+      <Button fx:id="backBtn" layoutX="24.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
     </children>
 </AnchorPane>

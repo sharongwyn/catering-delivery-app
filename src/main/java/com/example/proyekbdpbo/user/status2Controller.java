@@ -43,7 +43,7 @@ public class status2Controller {
     private TableColumn<orderItem, Double> colPrice;
 
     @FXML
-    private ImageView backBtn;
+    private Button backBtn;
 
 
     public void setOrderId(int orderId) {

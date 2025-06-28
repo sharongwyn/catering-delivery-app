@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -38,11 +39,6 @@
             <Image url="@../../../images/hourglass.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="backBtn" fitHeight="24.0" fitWidth="26.0" layoutX="22.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/left-arrow.png" />
-         </image>
-      </ImageView>
       <Label layoutX="32.0" layoutY="104.0" prefHeight="18.0" prefWidth="162.0" text="We have received your order." />
       <Label layoutX="32.0" layoutY="121.0" prefHeight="18.0" prefWidth="176.0" text="Now waiting for confirmation..." />
       <VBox layoutX="30.0" layoutY="483.0" prefHeight="200.0" prefWidth="299.0" spacing="10.0">
@@ -62,6 +58,7 @@
             </TableView>
          </children>
       </VBox>
+      <Button fx:id="backBtn" layoutX="24.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
     </children>
 
 </AnchorPane>

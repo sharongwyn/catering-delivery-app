@@ -32,7 +32,7 @@ public class addDeliveryController {
     @FXML
     private Button addDeliveryButton;
     @FXML
-    private ImageView backBtn;
+    private Button backBtn;
 
     @FXML
     public void initialize() {

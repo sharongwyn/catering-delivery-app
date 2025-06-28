@@ -35,7 +35,7 @@ public class status4oController {
     private Button skipButton;
 
     @FXML
-    private ImageView backBtn;
+    private Button backBtn;
 
     private String starEmpty;
     private String starFull;

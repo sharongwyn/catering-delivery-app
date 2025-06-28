@@ -34,10 +34,7 @@ public class status3Controller {
     private Label estimationTime;
 
     @FXML
-    private ImageView backBtn;
-
-    @FXML
-    private Label remainingTime;
+    private Button backBtn;
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;

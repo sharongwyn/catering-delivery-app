@@ -43,9 +43,9 @@
          </padding>
       </HBox>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff5e1" height="134.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="360.0" />
-      <Label layoutX="31.0" layoutY="78.0" text="Schedule Delivery">
+      <Label layoutX="31.0" layoutY="78.0" text="SCHEDULE DELIVERY">
          <font>
-            <Font name="Arial Black" size="24.0" />
+            <Font name="Arial Black" size="21.0" />
          </font>
       </Label>
       <DatePicker fx:id="filterDatePicker" layoutX="62.0" layoutY="161.0" />

@@ -33,7 +33,7 @@ public class status4bController {
     private Button skipButton;
 
     @FXML
-    private ImageView backBtn;
+    private Button backBtn;
 
     @FXML
     private ImageView star1, star2, star3, star4, star5;
