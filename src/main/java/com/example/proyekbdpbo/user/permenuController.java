@@ -72,18 +72,19 @@ public class permenuController {
             int quantity = Integer.parseInt(qtyText);
             if (quantity <= 0) return;
 
-            String currentBranch = cartstorage.getCurrentBranch();
-            String menuBranch = currentMenu.getBranch(); // di class menu
+            Integer currentBranchId = cartstorage.getCurrentBranchId();
+            Integer menuBranchId = currentMenu.getBranchId(); // pastikan class menu punya branchId
+
 
             // Validasi: jika cart sudah berisi item dari cabang lain
-            if (currentBranch != null && !currentBranch.equals(menuBranch)) {
-                showAlert2("Cart must be from the same branch. Clear cart first if you want to switch branch..");
+            if (currentBranchId != null && !currentBranchId.equals(menuBranchId)) {
+                showAlert2("Cart must be from the same branch. Clear cart first if you want to switch branch!");
                 return;
             }
 
             // Kalau belum ada cabang di cart, artinya cart kosong → set cabang awal
-            if (currentBranch == null) {
-                cartstorage.setCurrentBranch(menuBranch);
+            if (currentBranchId == null) {
+                cartstorage.setCurrentBranchId(menuBranchId);
             }
 
             cartitem item = new cartitem(currentMenu.getName(), quantity, currentMenu.getPrice());

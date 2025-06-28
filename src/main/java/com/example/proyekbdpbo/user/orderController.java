@@ -102,26 +102,36 @@ public class orderController {
 
 
     private void loadMenusForBranch(branchwithmenus branch) {
-        String query = "SELECT * FROM menus WHERE branch_id = " + branch.getId();
+        // Ganti sesuai nama kolom dan tabel di database kamu
+        String query = """
+        SELECT mh.nama_menu, mh.image_path, mh.harga_menu, mh.deskripsi
+        FROM menu_harian_cabang mhc
+        JOIN menu_harian mh ON mhc.id_menuharian = mh.id_menuHarian
+        WHERE mhc.id_cabang = %d
+          AND mhc.tanggal_menu = CURRENT_DATE + INTERVAL '1 day'
+        ORDER BY mhc.tanggal_menu DESC
+        """.formatted(branch.getId());
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                String menuName = rs.getString("name");
+                String menuName = rs.getString("nama_menu");
                 String image = rs.getString("image_path");
-                double price = rs.getDouble("price");
-                String description = rs.getString("description");
+                double price = rs.getDouble("harga_menu");
+                String description = rs.getString("deskripsi");
 
                 menu m = new menu(menuName, image, price, description);
+                m.setBranchId(branch.getId());
                 branch.addMenu(m);
             }
 
         } catch (SQLException e) {
-            System.out.println("Error fetching menus");
+            System.out.println("Error fetching menus for branch");
             e.printStackTrace();
         }
+
     }
 
     private void showMenus(ArrayList<menu> menus) {

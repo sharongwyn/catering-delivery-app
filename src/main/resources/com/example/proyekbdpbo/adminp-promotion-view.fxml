@@ -90,7 +90,7 @@
             <Font size="8.0" />
          </font>
       </Label>
-      <Button fx:id="clearButton" layoutX="36.0" layoutY="521.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="52.0" style="-fx-background-color: #665337;" text="Clear" textFill="WHITE" onAction="#clearFields">
+      <Button fx:id="clearButton" layoutX="36.0" layoutY="521.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="23.0" prefWidth="52.0" style="-fx-background-color: #665337;" text="Clear" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>

@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class cartstorage {
-    private static String currentBranch = null;
+    private static Integer currentBranchId = null;
     private static final ObservableList<cartitem> cartList = FXCollections.observableArrayList();
 
     public static ObservableList<cartitem> getCartList() {
@@ -12,7 +12,6 @@ public class cartstorage {
     }
 
     public static void addItem(cartitem item) {
-        // Cek apakah menu udah ada di cart
         for (cartitem c : cartList) {
             if (c.getName().equals(item.getName())) {
                 c.setQuantity(c.getQuantity() + item.getQuantity());
@@ -24,17 +23,18 @@ public class cartstorage {
 
     public static void clearCart() {
         cartList.clear();
+        currentBranchId = null;
     }
 
     public static ObservableList<cartitem> getItems() {
         return cartList;
     }
 
-    public static String getCurrentBranch() {
-        return currentBranch;
+    public static Integer getCurrentBranchId() {
+        return currentBranchId;
     }
 
-    public static void setCurrentBranch(String currentBranch) {
-        cartstorage.currentBranch = currentBranch;
+    public static void setCurrentBranchId(Integer currentBranchId) {
+        cartstorage.currentBranchId = currentBranchId;
     }
 }

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: #FFFCF7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.adminPusat.menuController">
    <children>
       <HBox layoutX="1.0" layoutY="643.0" prefHeight="90.0" prefWidth="334.0" spacing="68.0" style="-fx-background-color: #FFF5E1;">
@@ -84,24 +83,24 @@
       <Label layoutX="27.0" layoutY="486.0" text="Price" />
       <Label layoutX="25.0" layoutY="561.0" text="Category" />
       <Label layoutX="187.0" layoutY="486.0" text="Rp" />
-      <Button fx:id="addButton" layoutX="173.0" layoutY="602.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="45.0" style="-fx-background-color: #CD853F;" text="Add" textFill="WHITE" onAction="#handleAdd">
+      <Button fx:id="addButton" layoutX="173.0" layoutY="602.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="45.0" style="-fx-background-color: #CD853F;" text="Add" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="deleteButton" layoutX="281.0" layoutY="601.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="53.0" style="-fx-background-color: #B22222;" text="Delete" textFill="WHITE" onAction="#handleDelete">
+      <Button fx:id="deleteButton" layoutX="281.0" layoutY="601.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="53.0" style="-fx-background-color: #B22222;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="saveButton" layoutX="225.0" layoutY="602.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="49.0" style="-fx-background-color: #008000;" text="Save" textFill="WHITE" onAction="#handleSave">
+      <Button fx:id="saveButton" layoutX="225.0" layoutY="602.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="49.0" style="-fx-background-color: #008000;" text="Save" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Button>
       <Label layoutX="25.0" layoutY="524.0" text="Image Path" />
       <TextField fx:id="addimageField" layoutX="186.0" layoutY="520.0" prefHeight="25.0" prefWidth="149.0" />
-      <Button fx:id="clearButton" layoutX="25.0" layoutY="602.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="52.0" style="-fx-background-color: #665337;" text="Clear" textFill="WHITE" onAction="#clearFields">
+      <Button fx:id="clearButton" layoutX="25.0" layoutY="602.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="23.0" prefWidth="52.0" style="-fx-background-color: #665337;" text="Clear" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
