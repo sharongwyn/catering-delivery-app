@@ -3,14 +3,15 @@ package com.example.proyekbdpbo.user;
 import com.example.proyekbdpbo.database.DatabaseConnection;
 import com.example.proyekbdpbo.model.cartitem;
 import com.example.proyekbdpbo.model.cartstorage;
+import com.example.proyekbdpbo.utils.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.sql.Connection;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class cartController {
     @FXML private TableView<cartitem> orderTable;
@@ -31,12 +32,12 @@ public class cartController {
 
     private ObservableList<cartitem> cartItems = FXCollections.observableArrayList();
 
-    private final double DISCOUNT_PERCENT = 0.2;
-    private final double DELIVERY_CHARGE = 0.0;
+    private double discountPercent = 0.0;
+    private double deliveryChargeAmount = 0.0;
+    private Integer idPromosi = null;
 
     @FXML
     public void initialize() {
-
     }
 
     public void setupCart() {
@@ -44,8 +45,6 @@ public class cartController {
 
         itemCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-//        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
         priceCol.setCellValueFactory(cellData -> {
             cartitem item = cellData.getValue();
             double totalPrice = item.getPrice() * item.getQuantity();
@@ -54,7 +53,7 @@ public class cartController {
 
         orderTable.setItems(cartItems);
 
-        selectDelivery.setItems(FXCollections.observableArrayList("07.00", "12.00", "18.00"));
+        selectDelivery.setItems(FXCollections.observableArrayList("pagi", "siang", "sore"));
         selectPayment.setItems(FXCollections.observableArrayList("Transfer", "Tunai"));
 
         deleteButton.setOnAction(e -> {
@@ -78,60 +77,129 @@ public class cartController {
             insertToDatabase();
             cartstorage.clearCart();
             updatePriceSummary();
-            showAlert("Order placed successfully!");
         });
 
         updatePriceSummary();
     }
 
     private void updatePriceSummary() {
+        discountPercent = fetchValidDiscountPercentage();
+        deliveryChargeAmount = fetchDeliveryChargeByUserCity();
+
         double subtotal = cartItems.stream()
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
-        double discountAmount = subtotal * DISCOUNT_PERCENT;
-        double total = subtotal - discountAmount + DELIVERY_CHARGE;
+        double discountAmount = subtotal * discountPercent;
+        double total = subtotal - discountAmount + deliveryChargeAmount;
 
         subtotalPrice.setText(String.format("Rp %.2f", subtotal));
         discount.setText(String.format("Rp %.2f", discountAmount));
-        deliveryCharge.setText(String.format("Rp %.2f", DELIVERY_CHARGE));
+        deliveryCharge.setText(String.format("Rp %.2f", deliveryChargeAmount));
         totalPrice.setText(String.format("Rp %.2f", total));
+    }
+
+    private double fetchValidDiscountPercentage() {
+        double promo = 0.0;
+        String query = "SELECT id_promosi, potongan_promo FROM promosi WHERE ? BETWEEN tanggal_promoBerlaku AND tanggal_promoBerakhir LIMIT 1";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setDate(1, Date.valueOf(LocalDate.now()));
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                idPromosi = rs.getInt("id_promosi");
+                promo = rs.getDouble("potongan_promo");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return promo;
+    }
+
+    private double fetchDeliveryChargeByUserCity() {
+        double ongkos = 0.0;
+        String query = "SELECT o.ongkos FROM ongkos o JOIN pelanggan p ON o.wilayah = p.kota::text WHERE p.id_user = ? LIMIT 1";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, Session.getIdPelanggan());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                ongkos = rs.getDouble("ongkos");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ongkos;
     }
 
     private void insertToDatabase() {
         double subtotal = cartItems.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
-        double discountAmount = subtotal * DISCOUNT_PERCENT;
-        double total = subtotal - discountAmount + DELIVERY_CHARGE;
-        String payment = selectPayment.getValue();
+        double discountAmount = subtotal * discountPercent;
+        double total = subtotal - discountAmount + deliveryChargeAmount;
         String delivery = selectDelivery.getValue();
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String sqlTransaksi = "INSERT INTO transaksi (subtotal, discount, delivery_charge, total, payment_method, delivery_time) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement psTrans = conn.prepareStatement(sqlTransaksi, Statement.RETURN_GENERATED_KEYS);
-            psTrans.setDouble(1, subtotal);
-            psTrans.setDouble(2, discountAmount);
-            psTrans.setDouble(3, DELIVERY_CHARGE);
-            psTrans.setDouble(4, total);
-            psTrans.setString(5, payment);
-            psTrans.setString(6, delivery);
-            psTrans.executeUpdate();
-
-            ResultSet rs = psTrans.getGeneratedKeys();
-            int transaksiId = -1;
-            if (rs.next()) {
-                transaksiId = rs.getInt(1);
+            // Ambil id_cabang dari pelanggan
+            int idCabang = -1;
+            String sqlCabang = "SELECT id_cabang FROM cabang WHERE nama_cabang = (SELECT kota::text FROM pelanggan WHERE id_user = ?)";
+            try (PreparedStatement psCabang = conn.prepareStatement(sqlCabang)) {
+                psCabang.setInt(1, Session.getIdPelanggan());
+                ResultSet rsCabang = psCabang.executeQuery();
+                if (rsCabang.next()) {
+                    idCabang = rsCabang.getInt("id_cabang");
+                }
             }
 
-            String sqlDetail = "INSERT INTO detail_transaksi (transaksi_id, menu_name, quantity, price) VALUES (?, ?, ?, ?)";
-            PreparedStatement psDetail = conn.prepareStatement(sqlDetail);
-            for (cartitem item : cartItems) {
-                psDetail.setInt(1, transaksiId);
-                psDetail.setString(2, item.getName());
-                psDetail.setInt(3, item.getQuantity());
-                psDetail.setDouble(4, item.getPrice());
-                psDetail.addBatch();
+            // Ambil id_pelanggan berdasarkan id_user
+            int idPelanggan = -1;
+            String sqlGetPelanggan = "SELECT id_pelanggan FROM pelanggan WHERE id_user = ?";
+            try (PreparedStatement psGet = conn.prepareStatement(sqlGetPelanggan)) {
+                psGet.setInt(1, Session.getIdPelanggan());
+                ResultSet rsGet = psGet.executeQuery();
+                if (rsGet.next()) {
+                    idPelanggan = rsGet.getInt("id_pelanggan");
+                } else {
+                    showAlert("Pelanggan tidak ditemukan!");
+                    return;
+                }
             }
-            psDetail.executeBatch();
 
+
+            String sqlOrder = "INSERT INTO \"ORDER\" (id_pelanggan, id_promosi, id_status, id_cabang, total_harga, ongkos, delivery_schedule) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id_order";
+            try (PreparedStatement psOrder = conn.prepareStatement(sqlOrder)) {
+                psOrder.setInt(1, idPelanggan);
+                if (idPromosi != null) {
+                    psOrder.setInt(2, idPromosi);
+                } else {
+                    psOrder.setNull(2, Types.INTEGER);
+                }
+                psOrder.setInt(3, 1); // id_status default misalnya "menunggu konfirmasi"
+                psOrder.setInt(4, idCabang);
+                psOrder.setDouble(5, total);
+                psOrder.setDouble(6, deliveryChargeAmount);
+                psOrder.setObject(7, delivery, java.sql.Types.OTHER);
+
+                ResultSet rsOrder = psOrder.executeQuery();
+                int orderId = -1;
+                if (rsOrder.next()) {
+                    orderId = rsOrder.getInt("id_order");
+                }
+
+                String sqlDetail = "INSERT INTO DETAIL_ORDER (id_order, id_menuHarian, jumlah, harga) VALUES (?, ?, ?, ?)";
+                try (PreparedStatement psDetail = conn.prepareStatement(sqlDetail)) {
+                    for (cartitem item : cartItems) {
+                        psDetail.setInt(1, orderId);
+                        psDetail.setInt(2, item.getId());
+                        psDetail.setInt(3, item.getQuantity());
+                        psDetail.setDouble(4, item.getPrice());
+                        psDetail.addBatch();
+                    }
+                    psDetail.executeBatch();
+                }
+            }
+
+            showAlert("Order placed successfully!");
 
         } catch (SQLException e) {
             e.printStackTrace();

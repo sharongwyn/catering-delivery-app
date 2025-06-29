@@ -7,8 +7,9 @@ public class menu {
     private String description;
 //    private String branch;
     private int branchId;
-
-    public menu(String name, String imageFileName) {
+    private int id;
+    public menu(int id, String name, String imageFileName) {
+        this.id = id;
         this.name = name;
 //        var url = getClass().getResource("/images/" + imageFileName);
 //        if (url == null) {
@@ -26,12 +27,20 @@ public class menu {
 
     }
 
-    public menu(String name, String imageFileName, double price, String description) {
+    public menu(int id,String name, String imageFileName, double price, String description) {
+        this.id = id;
         this.name = name;
         this.imagePath = imageFileName;
         this.price = price;
         this.description = description;
 
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() { return name; }

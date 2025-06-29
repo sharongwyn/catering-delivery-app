@@ -15,6 +15,13 @@ public class branch {
         this.telp = telp;
     }
 
+    public branch(int id, String name, double avgRating) {
+        this.id = id;
+        this.name = name;
+        this.avgRating = avgRating;
+    }
+
+
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
@@ -27,4 +34,9 @@ public class branch {
     public String toString() {
         return name;
     }
+
+    public int getId() {
+        return id;
+    }
+
 }

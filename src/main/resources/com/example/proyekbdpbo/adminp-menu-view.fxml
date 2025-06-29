@@ -19,7 +19,7 @@
    <children>
       <HBox layoutX="1.0" layoutY="644.0" prefHeight="76.0" prefWidth="358.0" spacing="68.0" style="-fx-background-color: #FFF5E1;">
          <children>
-            <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="performanceIcon" fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/performance.png" />
                </image>
@@ -27,12 +27,12 @@
                   <Insets top="3.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="menuIcon" fitHeight="54.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/menu.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="promotionIcon" fitHeight="45.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/marketing.png" />
                </image>
@@ -83,17 +83,17 @@
       <Label layoutX="27.0" layoutY="486.0" text="Price" />
       <Label layoutX="25.0" layoutY="561.0" text="Category" />
       <Label layoutX="187.0" layoutY="486.0" text="Rp" />
-      <Button fx:id="addButton" layoutX="173.0" layoutY="602.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="45.0" style="-fx-background-color: #CD853F;" text="Add" textFill="WHITE">
+      <Button fx:id="addButton" layoutX="173.0" layoutY="602.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="23.0" prefWidth="45.0" style="-fx-background-color: #CD853F;" text="Add" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="deleteButton" layoutX="281.0" layoutY="601.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="53.0" style="-fx-background-color: #B22222;" text="Delete" textFill="WHITE">
+      <Button fx:id="deleteButton" layoutX="281.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="22.0" prefWidth="53.0" style="-fx-background-color: #B22222;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="saveButton" layoutX="225.0" layoutY="602.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="49.0" style="-fx-background-color: #008000;" text="Save" textFill="WHITE">
+      <Button fx:id="saveButton" layoutX="225.0" layoutY="602.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="23.0" prefWidth="49.0" style="-fx-background-color: #008000;" text="Save" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>

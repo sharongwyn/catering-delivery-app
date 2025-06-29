@@ -36,7 +36,6 @@ public class addDeliveryController {
 
     @FXML
     public void initialize() {
-        SessionCabang.setIdCabang(1);
         loadStaffPengiriman();
         loadKendaraan();
         addDeliveryButton.setCursor(Cursor.HAND);

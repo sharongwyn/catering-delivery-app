@@ -64,28 +64,30 @@ public class historyController {
 
     private void loadOrderHistory() {
         String sql = """
-            SELECT
-                o.id_order,
-                s.status,
-                c.nama_cabang AS branch_name,
-                o.tanggal_order AS order_date,
-                SUM(d.jumlah) AS total_items,
-                o.total_harga AS total_price
-            FROM "ORDER" o
-            JOIN detail_order d ON o.id_order = d.id_order
-            JOIN admin_cabang ac ON o.id_adminCabang = ac.id_adminCabang
-            JOIN cabang c ON ac.id_cabang = c.id_cabang
-            JOIN status s ON o.id_status = s.id_status
-            WHERE o.id_pelanggan = ?
-            GROUP BY o.id_order, s.status, o.tanggal_order, o.total_harga, c.alamat_cabang,c.nama_cabang
-            ORDER BY o.tanggal_order DESC;
-    """;
+    SELECT
+        o.id_order,
+        s.status,
+        c.nama_cabang AS branch_name,
+        o.tanggal_order AS order_date,
+        SUM(d.jumlah) AS total_items,
+        o.total_harga AS total_price
+    FROM "ORDER" o
+    JOIN detail_order d ON o.id_order = d.id_order
+    LEFT JOIN admin_cabang ac ON o.id_adminCabang = ac.id_adminCabang
+    JOIN cabang c ON o.id_cabang = c.id_cabang
+    JOIN status s ON o.id_status = s.id_status
+    WHERE o.id_pelanggan = ?
+    GROUP BY o.id_order, s.status, o.tanggal_order, o.total_harga, c.nama_cabang
+    ORDER BY o.tanggal_order DESC
+""";
+
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int userId = Session.getIdPelanggan();
-            stmt.setInt(1, 1);
+            int userId = getIdPelangganByIdUser(Session.getIdPelanggan());
+            stmt.setInt(1, userId);
+            System.out.println(userId);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -106,6 +108,19 @@ public class historyController {
             e.printStackTrace();
         }
     }
+
+    public static int getIdPelangganByIdUser(int idUser) {
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT id_pelanggan FROM pelanggan WHERE id_user = ?")) {
+            stmt.setInt(1, idUser);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) return rs.getInt("id_pelanggan");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
 
 
     private HBox createOrderSummary(int orderId, String status, String branch, String date, int totalItems, int totalPrice) {

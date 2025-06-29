@@ -5,8 +5,15 @@ import com.example.proyekbdpbo.model.promotion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -24,6 +31,10 @@ public class promotionController {
     @FXML private Button addButton;
     @FXML private Button saveButton;
     @FXML private Button deleteButton;
+
+    @FXML private ImageView promotionIcon;
+    @FXML private ImageView menuIcon;
+    @FXML private ImageView performanceIcon;
 
     private ObservableList<promotion> promotionList = FXCollections.observableArrayList();
     private promotion selectedPromo = null;
@@ -45,6 +56,24 @@ public class promotionController {
                 pickEdate.setValue(newVal.getEndDate().toLocalDate());
             }
         });
+
+        promotionIcon.setCursor(Cursor.HAND);
+        menuIcon.setCursor(Cursor.HAND);
+        performanceIcon.setCursor(Cursor.HAND);
+
+        promotionIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/adminp-promotion-view.fxml"));
+        menuIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/adminp-menu-view.fxml"));
+        performanceIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/adminp-performance-view.fxml"));
+    }
+
+    private void switchScene(String fxmlPath) {
+        try {
+            Stage stage = (Stage) menuIcon.getScene().getWindow(); // ambil window dari salah satu ikon
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadPromotions() {
@@ -73,7 +102,7 @@ public class promotionController {
             LocalDate edate = pickEdate.getValue();
 
             if (sdate == null || edate == null) {
-                showAlert("Date tidak boleh kosong");
+                showAlert(Alert.AlertType.ERROR, "Error","Date cannot be empty");
                 return;
             }
 
@@ -89,17 +118,19 @@ public class promotionController {
 
             clearFields();
             loadPromotions();
+            showAlert(Alert.AlertType.INFORMATION, "Success","Promotion has been added successfully!");
         } catch (NumberFormatException e) {
-            showAlert("Masukkan discount berupa angka desimal. Contoh: 0.2");
+            showAlert(Alert.AlertType.ERROR, "Error","Masukkan discount berupa angka desimal. Contoh: 0.2");
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error","Fail to add promotion: " +e.getMessage());
         }
     }
 
     @FXML
     private void handleSave() {
         if (selectedPromo == null) {
-            showAlert("Pilih data yang ingin diedit.");
+            showAlert(Alert.AlertType.ERROR, "Error","Pilih data yang ingin diedit.");
             return;
         }
 
@@ -109,7 +140,7 @@ public class promotionController {
             LocalDate edate = pickEdate.getValue();
 
             if (sdate == null || edate == null) {
-                showAlert("Date must be filled!");
+                showAlert(Alert.AlertType.ERROR, "Error","Date must be filled!");
                 return;
             }
 
@@ -126,17 +157,19 @@ public class promotionController {
 
             clearFields();
             loadPromotions();
+            showAlert(Alert.AlertType.INFORMATION, "Success","Promotion has been updated successfully!");
         } catch (NumberFormatException e) {
-            showAlert("Masukkan discount berupa angka desimal. Contoh: 0.2");
+            showAlert(Alert.AlertType.ERROR, "Error","Masukkan discount berupa angka desimal. Contoh: 0.2");
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error","Fail to update promotion: " +e.getMessage());
         }
     }
 
     @FXML
     private void handleDelete() {
         if (selectedPromo == null) {
-            showAlert("Pilih data yang ingin dihapus.");
+            showAlert(Alert.AlertType.ERROR, "Error","Pilih data yang ingin dihapus.");
             return;
         }
 
@@ -147,8 +180,10 @@ public class promotionController {
             stmt.executeUpdate();
             clearFields();
             loadPromotions();
+            showAlert(Alert.AlertType.INFORMATION, "Success","Promotion has been deleted successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error","Fail to delete promotion: " +e.getMessage());
         }
     }
 
@@ -161,8 +196,10 @@ public class promotionController {
         selectedPromo = null;
     }
 
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }

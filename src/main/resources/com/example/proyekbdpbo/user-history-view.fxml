@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -41,19 +40,15 @@
                 <Insets bottom="20.0" left="36.0" right="36.0" top="20.0" />
             </padding>
         </HBox>
-      <Label layoutX="37.0" layoutY="67.0" text="History">
+      <Label layoutX="37.0" layoutY="67.0" text="HISTORY">
          <font>
             <Font name="Arial Black" size="28.0" />
          </font>
       </Label>
 
-        <VBox fx:id="orderContainer"
-              layoutX="28.0" layoutY="161.0"
-              prefWidth="302.0" prefHeight="439.0"
-              spacing="20.0"
-              style="-fx-background-color: #FFFCF7;">
+        <VBox fx:id="orderContainer" layoutX="28.0" layoutY="161.0" prefHeight="439.0" prefWidth="302.0" spacing="20.0" style="-fx-background-color: #FFFCF7;">
             <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
+                <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
         </VBox>
 

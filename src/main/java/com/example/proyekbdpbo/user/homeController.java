@@ -1,31 +1,24 @@
 package com.example.proyekbdpbo.user;
 
-
 import com.example.proyekbdpbo.database.DatabaseConnection;
-import com.example.proyekbdpbo.model.branch;
-import com.example.proyekbdpbo.model.branchwithmenus;
 import com.example.proyekbdpbo.model.menu;
-import com.example.proyekbdpbo.model.user;
+import com.example.proyekbdpbo.utils.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class homeController {
@@ -34,26 +27,21 @@ public class homeController {
     private Label titleHomeView;
 
     @FXML
-    private ChoiceBox<branchwithmenus> selectBranch;
-
-    @FXML
     private Label menu1name, menu2name, menu3name;
 
     @FXML
     private ImageView menu1image, menu2image, menu3image;
 
-    private user userloggedin;
-
-    @FXML
-    private HBox menuRec; // Ini bind dari ScrollPane kamu
-
     @FXML
     private ImageView homeIcon, orderIcon, historyIcon, profileIcon;
+
+    @FXML
+    private Label cityLabel;
 
 
     private void switchScene(String fxmlPath) {
         try {
-            Stage stage = (Stage) homeIcon.getScene().getWindow(); // ambil window dari salah satu ikon
+            Stage stage = (Stage) homeIcon.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
             stage.setScene(new Scene(root));
         } catch (IOException e) {
@@ -61,47 +49,84 @@ public class homeController {
         }
     }
 
-
     @FXML
     public void initialize() {
+        titleHomeView.setText("Hi " + Session.getNamaPelanggan() + "!");
 
-        userloggedin = new user("desi123", "desi");
-        titleHomeView.setText("Hi " + userloggedin.getNama() + "!");
-
-        ArrayList<branchwithmenus> branchList = getBranchesFromDB();
-        selectBranch.getItems().addAll(branchList);
-
-        if (!branchList.isEmpty()) {
-            selectBranch.setValue(branchList.get(0)); // otomatis pilih Surabaya (index 0)
-
-            // Ambil dan tampilkan menu dari Surabaya
-            branchwithmenus selected = selectBranch.getValue();
-            if (selected != null) {
-                ArrayList<menu> menus = getMenusByBranchId(selected.getId());
-                showMenus(menus);
-            }
+        ArrayList<menu> menus = getMenusByUserCity();
+        showMenus(menus);
+        String userCity = getUserCity();
+        if (userCity != null) {
+            cityLabel.setText(userCity);
         }
 
 
-        selectBranch.setOnAction(e -> {
-            branchwithmenus selected = selectBranch.getValue();
-            if (selected != null) {
-                ArrayList<menu> menus = getMenusByBranchId(selected.getId());
-                showMenus(menus);
-            }
-        });
-
-        homeIcon.setCursor(javafx.scene.Cursor.HAND);
-        orderIcon.setCursor(javafx.scene.Cursor.HAND);
-        historyIcon.setCursor(javafx.scene.Cursor.HAND);
+        homeIcon.setCursor(Cursor.HAND);
+        orderIcon.setCursor(Cursor.HAND);
+        historyIcon.setCursor(Cursor.HAND);
         profileIcon.setCursor(Cursor.HAND);
 
         homeIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/user-home-view.fxml"));
         orderIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/user-order-view.fxml"));
         historyIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/user-history-view.fxml"));
         profileIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/user-profile-view.fxml"));
+    }
+
+    private String getUserCity() {
+        String city = null;
+        String query = "SELECT kota FROM pelanggan WHERE id_user = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, Session.getIdPelanggan()); // atau Session.getIdUser() tergantung yang kamu simpan
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                city = rs.getString("kota");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Error fetching user city");
+            e.printStackTrace();
+        }
+
+        return city;
+    }
 
 
+    private ArrayList<menu> getMenusByUserCity() {
+        ArrayList<menu> menuList = new ArrayList<>();
+        String query = """
+                SELECT mh.id_menuHarian,mh.nama_menu, mh.image_path
+                           FROM PELANGGAN p
+                           JOIN CABANG c ON p.kota::text = c.nama_cabang
+                           JOIN MENU_HARIAN_CABANG mhc ON c.id_cabang = mhc.id_cabang
+                           JOIN MENU_HARIAN mh ON mh.id_menuHarian = mhc.id_menuHarian
+                           WHERE p.id_user = ?
+                           ORDER BY mhc.tanggal_menu DESC
+                           LIMIT 3
+                """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, Session.getIdPelanggan());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id_menuHarian");
+                String name = rs.getString("nama_menu");
+                String imagePath = rs.getString("image_path");
+                menuList.add(new menu(id,name, imagePath));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Error fetching menus by user city");
+            e.printStackTrace();
+        }
+
+        return menuList;
     }
 
     private void showMenus(ArrayList<menu> menus) {
@@ -111,13 +136,12 @@ public class homeController {
         menu2image.setImage(null);
         menu3name.setText("");
         menu3image.setImage(null);
-        // Kosongkan HBox dulu
+
         for (int i = 0; i < menus.size(); i++) {
             menu m = menus.get(i);
-            String menuName = m.getName(); // nama menu dari database
-            String imageFileName = m.getImagePath(); // nama file gambar dari database
+            String menuName = m.getName();
+            String imageFileName = m.getImagePath();
 
-            // Load gambar
             Image image = null;
             try {
                 URL resourceUrl = getClass().getResource("/images/" + imageFileName);
@@ -127,8 +151,6 @@ public class homeController {
                 } else {
                     System.out.println("❌ Gambar tidak ditemukan: " + imageFileName);
                 }
-//                String imagePath = getClass().getResource("/images/" + imageFileName).toExternalForm();
-//                image = new Image(imagePath);
             } catch (Exception e) {
                 System.out.println("Gagal load gambar: " + imageFileName);
                 e.printStackTrace();
@@ -145,150 +167,5 @@ public class homeController {
                 if (image != null) menu3image.setImage(image);
             }
         }
-
-
-//        menuRec.getChildren().clear();
-//
-//        for (menu m : menus) {
-//            VBox menuBox = new VBox();
-//            menuBox.setPrefSize(200, 145);
-//            menuBox.setSpacing(5);
-//
-//            ImageView imageView = new ImageView();
-//            imageView.setFitHeight(140);
-//            imageView.setFitWidth(200);
-//            imageView.setPreserveRatio(true);
-//
-//            try {
-//                imageView.setImage(new Image(getClass().getResourceAsStream("/images/" + m.getImagePath())));
-//
-//            } catch (Exception e) {
-//                System.out.println("Gagal load image: " + m.getImagePath());
-//            }
-//
-//            Label nameLabel = new Label(m.getName());
-//            nameLabel.setPrefSize(200, 36);
-//            nameLabel.setStyle("-fx-font-size: 16px; -fx-font-family: 'Arial Rounded MT Bold';");
-//
-//            menuBox.getChildren().addAll(imageView, nameLabel);
-//            menuRec.getChildren().add(menuBox);
-//        }
-
-
-
-
-
     }
-
-    public ArrayList<menu> getMenufromDB() {
-        ArrayList<menu> menuList = new ArrayList<>();
-        String query = "SELECT name, image_path from menus";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String imagePath = rs.getString("image_path");
-                menuList.add(new menu(name, imagePath));
-
-
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error retrieving menu from database");
-            e.printStackTrace();
-        }
-
-
-        return menuList;
-
-    }
-
-    private void showMenusFromDB() {
-        ArrayList<menu> menus = getMenufromDB();
-
-        for (menu m : menus) {
-            VBox menuBox = new VBox();
-            menuBox.setPrefSize(200, 145);
-            menuBox.setSpacing(5);
-
-            ImageView imageView = new ImageView();
-            imageView.setFitHeight(140);
-            imageView.setFitWidth(200);
-            imageView.setPreserveRatio(true);
-
-            try {
-                imageView.setImage(new Image(getClass().getResourceAsStream("/images/" + m.getImagePath())));
-            } catch (Exception e) {
-                System.out.println("Gagal load image: " + m.getImagePath());
-            }
-
-            Label nameLabel = new Label(m.getName());
-            nameLabel.setPrefSize(200, 36);
-            nameLabel.setStyle("-fx-font-size: 16px; -fx-font-family: 'Arial Rounded MT Bold';");
-
-            menuBox.getChildren().addAll(imageView, nameLabel);
-            menuRec.getChildren().add(menuBox); // menuRec itu HBox di ScrollPane kamu
-        }
-
-
-    }
-
-
-    private ArrayList<branchwithmenus> getBranchesFromDB() {
-        ArrayList<branchwithmenus> branches = new ArrayList<>();
-
-        String query = "SELECT * FROM branch";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nama = rs.getString("name");
-
-                branchwithmenus b = new branchwithmenus(nama);
-                b.setId(id); // Pastikan branchwithmenus kamu punya method setId
-                branches.add(b);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error fetching branches");
-            e.printStackTrace();
-        }
-
-        return branches;
-    }
-
-    private ArrayList<menu> getMenusByBranchId(int branchId) {
-        ArrayList<menu> menuList = new ArrayList<>();
-        String query = "SELECT name, image_path FROM menus WHERE branch_id = " + branchId;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String imagePath = rs.getString("image_path");
-                menuList.add(new menu(name, imagePath));
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error fetching menus by branch_id");
-            e.printStackTrace();
-        }
-
-        return menuList;
-    }
-
 }
-
-
-
-
-
-

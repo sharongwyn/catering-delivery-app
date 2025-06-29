@@ -33,4 +33,8 @@ public class branchwithmenus {
     public String toString() {
         return name; // supaya tampil di choicebox as string, karena kalau ngga pakai ini bakal munculnya @234blabla
     }
+
+    public String getName(){
+        return name;
+    }
 }

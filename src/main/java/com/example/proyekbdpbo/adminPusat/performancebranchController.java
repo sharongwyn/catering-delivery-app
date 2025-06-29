@@ -1,8 +1,11 @@
 package com.example.proyekbdpbo.adminPusat;
 
 import com.example.proyekbdpbo.database.DatabaseConnection;
+import com.example.proyekbdpbo.model.branch;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,16 +35,16 @@ public class performancebranchController {
     @FXML private Button backButton;
 
     private int selectedBranchId; // akan diisi dari controller sebelumnya
+    private branch selectedBranch;
 
-    public void setBranchId(int branchId) {
-        this.selectedBranchId = branchId;
+    public void setBranch(branch selected) {
+        this.selectedBranch = selected;
+        this.selectedBranchId = selected.getId();
+        // Misal update label atau ambil data berdasarkan selected.getId()
+        System.out.println("Branch selected: " + selected.getName());
+        updateAverageRating();
         loadBranchDetails();
         loadTopReviews();
-    }
-
-    @FXML
-    public void initialize() {
-        backButton.setOnAction(e -> handleBack());
     }
 
     private void loadBranchDetails() {
@@ -65,8 +68,31 @@ public class performancebranchController {
         }
     }
 
+    private void updateAverageRating() {
+        String sql = """
+        UPDATE CABANG
+        SET average_rating = sub.avg_rating
+        FROM (
+            SELECT id_cabang, ROUND(AVG(rating_cabang)::numeric, 2) AS avg_rating
+            FROM RATING_CABANG
+            GROUP BY id_cabang
+        ) AS sub
+        WHERE CABANG.id_cabang = sub.id_cabang
+    """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private void loadTopReviews() {
-        String sql = "SELECT id_pelanggan, ulasan_cabang FROM rating_cabang WHERE id_cabang = ? ORDER BY id_rating DESC LIMIT 3";
+        String sql = "SELECT id_pelanggan, ulasan_cabang FROM rating_cabang WHERE id_cabang = ? ORDER BY id_ratingCabang DESC LIMIT 3";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -92,16 +118,9 @@ public class performancebranchController {
     }
 
     @FXML
-    private void handleBack() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/adminPusat/adminp-performance-view.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void handleBack(ActionEvent e) {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.close();
     }
+
 }

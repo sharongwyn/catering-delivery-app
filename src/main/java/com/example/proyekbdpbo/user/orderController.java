@@ -3,6 +3,7 @@ package com.example.proyekbdpbo.user;
 import com.example.proyekbdpbo.database.DatabaseConnection;
 import com.example.proyekbdpbo.model.branchwithmenus;
 import com.example.proyekbdpbo.model.menu;
+import com.example.proyekbdpbo.utils.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -17,9 +18,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class orderController {
@@ -44,30 +45,17 @@ public class orderController {
 
     @FXML
     public void initialize() {
-        ArrayList<branchwithmenus> branchList = getBranchesFromDB();
-        selectBranch.getItems().addAll(branchList);
+        // Ambil cabang sesuai kota pelanggan yang login
+        branchwithmenus userBranch = getUserBranch();
 
-        if (!branchList.isEmpty()) {
-            selectBranch.setValue(branchList.get(0)); // default pilih Surabaya (index 0)
-
-            branchwithmenus selected = selectBranch.getValue();
-            if (selected != null) {
-                loadMenusForBranch(selected); // agar menus terisi
-                showMenus(selected.getMenus()); // tampilkan menunya
-            }
+        if (userBranch != null) {
+            selectBranch.getItems().add(userBranch);
+            selectBranch.setValue(userBranch);
+            loadMenusForBranch(userBranch);
+            showMenus(userBranch.getMenus());
+            selectBranch.setDisable(true); // agar tidak bisa diganti
         }
 
-        // Listener saat user memilih branch
-        selectBranch.setOnAction(event -> {
-            branchwithmenus selected = selectBranch.getValue();
-            if (selected != null) {
-                selected.getMenus().clear(); // reset jika sebelumnya sudah pernah dimuat
-                loadMenusForBranch(selected);
-                showMenus(selected.getMenus());
-            }
-        });
-
-        // Set action semua tombol view
         r1m1view.setOnAction(e -> handleMenuView(0));
         r1m2view.setOnAction(e -> handleMenuView(1));
         r2m1view.setOnAction(e -> handleMenuView(2));
@@ -86,12 +74,36 @@ public class orderController {
         orderIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/user-order-view.fxml"));
         historyIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/user-history-view.fxml"));
         profileIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/user-profile-view.fxml"));
+    }
 
+    private branchwithmenus getUserBranch() {
+        branchwithmenus result = null;
+        String query = """
+                SELECT c.id_cabang, c.nama_cabang FROM pelanggan p
+                JOIN cabang c ON c.nama_cabang = p.kota::text
+                WHERE p.id_user = ?
+                """;
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, Session.getIdPelanggan());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id_cabang");
+                String nama = rs.getString("nama_cabang");
+                result = new branchwithmenus(nama);
+                result.setId(id);
+            }
+        } catch (SQLException e) {
+            System.out.println("❌ Error fetching branch for user");
+            e.printStackTrace();
+        }
+        return result;
     }
 
     private void switchScene(String fxmlPath) {
         try {
-            Stage stage = (Stage) homeIcon.getScene().getWindow(); // ambil window dari salah satu ikon
+            Stage stage = (Stage) homeIcon.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
             stage.setScene(new Scene(root));
         } catch (IOException e) {
@@ -99,55 +111,31 @@ public class orderController {
         }
     }
 
-    private ArrayList<branchwithmenus> getBranchesFromDB() {
-        ArrayList<branchwithmenus> branches = new ArrayList<>();
-
-        String query = "SELECT * FROM branch";
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nama = rs.getString("name");
-
-                branchwithmenus b = new branchwithmenus(nama);
-                b.setId(id);
-                branches.add(b);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error fetching branches");
-            e.printStackTrace();
-        }
-
-        return branches;
-    }
-
-
     private void loadMenusForBranch(branchwithmenus branch) {
-        // Ganti sesuai nama kolom dan tabel di database kamu
         String query = """
-        SELECT mh.nama_menu, mh.image_path, mh.harga_menu, mh.deskripsi
-        FROM menu_harian_cabang mhc
+        SELECT mh.id_menuHarian, mh.nama_menu, mh.image_path, mh.harga_menu, mh.deskripsi
+        FROM pelanggan p
+        JOIN cabang c ON p.kota::text = c.nama_cabang
+        JOIN menu_harian_cabang mhc ON c.id_cabang = mhc.id_cabang
         JOIN menu_harian mh ON mhc.id_menuharian = mh.id_menuHarian
-        WHERE mhc.id_cabang = %d
-          AND mhc.tanggal_menu = CURRENT_DATE + INTERVAL '1 day'
+        WHERE p.id_user = ?
         ORDER BY mhc.tanggal_menu DESC
-        """.formatted(branch.getId());
+        """;
 
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, Session.getIdPelanggan());
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("id_menuHarian");
                 String menuName = rs.getString("nama_menu");
                 String image = rs.getString("image_path");
                 double price = rs.getDouble("harga_menu");
                 String description = rs.getString("deskripsi");
 
-                menu m = new menu(menuName, image, price, description);
+                menu m = new menu(id,menuName, image, price, description);
                 m.setBranchId(branch.getId());
                 branch.addMenu(m);
             }
@@ -156,7 +144,6 @@ public class orderController {
             System.out.println("Error fetching menus for branch");
             e.printStackTrace();
         }
-
     }
 
     private void showMenus(ArrayList<menu> menus) {
@@ -201,7 +188,6 @@ public class orderController {
         }
     }
 
-
     private void handleMenuView(int index) {
         branchwithmenus selected = selectBranch.getValue();
         if (selected != null && selected.getMenus().size() > index) {
@@ -215,10 +201,8 @@ public class orderController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-order-permenu-view.fxml"));
             Parent root = loader.load();
             permenuController controller = loader.getController();
-            controller.setMenu(m); // jika kamu passing data
+            controller.setMenu(m);
 
-//            permenuController controller = loader.getController();
-//            controller.setMenu(m);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Menu Detail");
@@ -234,9 +218,8 @@ public class orderController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-cart-view.fxml"));
             Parent root = loader.load();
 
-            // Ambil controllernya
             cartController controller = loader.getController();
-            controller.setupCart();  // <-- panggil ini!
+            controller.setupCart();
 
             Stage stage = new Stage();
             stage.setTitle("Your Cart");
@@ -247,4 +230,3 @@ public class orderController {
         }
     }
 }
-

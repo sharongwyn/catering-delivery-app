@@ -1,12 +1,14 @@
 package com.example.proyekbdpbo.model;
 
 public class cartitem {
+    private int id;
     private String name;
     private int quantity;
     private double price;
 
 
-    public cartitem(String name, int quantity, double price) {
+    public cartitem(int id, String name, int quantity, double price) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -35,4 +37,9 @@ public class cartitem {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public int getId() {
+        return id;
+    }
+
 }

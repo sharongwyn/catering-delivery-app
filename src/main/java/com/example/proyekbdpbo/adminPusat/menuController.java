@@ -6,7 +6,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.*;
 
 public class menuController {
@@ -27,6 +35,10 @@ public class menuController {
     @FXML private Button saveButton;
     @FXML private Button deleteButton;
     @FXML private Button clearButton;
+
+    @FXML private ImageView promotionIcon;
+    @FXML private ImageView menuIcon;
+    @FXML private ImageView performanceIcon;
 
     private ObservableList<MenuItem> menuList = FXCollections.observableArrayList();
     private MenuItem selectedItem = null;
@@ -77,6 +89,24 @@ public class menuController {
                 selectCategory.setValue(newVal.getCategory());
             }
         });
+
+        promotionIcon.setCursor(Cursor.HAND);
+        menuIcon.setCursor(Cursor.HAND);
+        performanceIcon.setCursor(Cursor.HAND);
+
+        promotionIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/adminp-promotion-view.fxml"));
+        menuIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/adminp-menu-view.fxml"));
+        performanceIcon.setOnMouseClicked(e -> switchScene("/com/example/proyekbdpbo/adminp-performance-view.fxml"));
+    }
+
+    private void switchScene(String fxmlPath) {
+        try {
+            Stage stage = (Stage) menuIcon.getScene().getWindow(); // ambil window dari salah satu ikon
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadMenuItems() {
@@ -95,8 +125,10 @@ public class menuController {
                 menuList.add(new MenuItem(id, name, desc, price, img, cat));
             }
             menuTable.setItems(menuList);
+
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
     }
 
@@ -123,8 +155,10 @@ public class menuController {
 
             clearFields();
             loadMenuItems();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "A new menu has been added!");
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Fail to add menu: " + e.getMessage());
         }
     }
 
@@ -154,8 +188,10 @@ public class menuController {
 
             clearFields();
             loadMenuItems();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Menu has been updated successfully!");
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Fail to update menu: " + e.getMessage());
         }
     }
 
@@ -174,8 +210,10 @@ public class menuController {
 
             clearFields();
             loadMenuItems();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Menu has been deleted successfully!");
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Fail to delete menu: " + e.getMessage());
         }
     }
 
@@ -189,5 +227,14 @@ public class menuController {
         menuTable.getSelectionModel().clearSelection();
         selectedItem = null;
     }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 }

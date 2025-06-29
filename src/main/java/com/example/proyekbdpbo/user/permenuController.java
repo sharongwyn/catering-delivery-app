@@ -87,7 +87,7 @@ public class permenuController {
                 cartstorage.setCurrentBranchId(menuBranchId);
             }
 
-            cartitem item = new cartitem(currentMenu.getName(), quantity, currentMenu.getPrice());
+            cartitem item = new cartitem(currentMenu.getId(),currentMenu.getName(), quantity, currentMenu.getPrice());
             cartstorage.addItem(item);
             quantityField.clear();
             showAlert("Item successfully added to cart!");

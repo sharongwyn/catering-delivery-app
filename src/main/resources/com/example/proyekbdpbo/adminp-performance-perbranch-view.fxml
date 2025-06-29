@@ -28,7 +28,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Button fx:id="backButton" layoutX="22.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
+      <Button fx:id="backButton" layoutX="22.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
       <Label fx:id="branchLabel" layoutX="31.0" layoutY="111.0" prefHeight="35.0" prefWidth="184.0" text="&lt;branch&gt;">
          <font>
             <Font name="Arial Black" size="24.0" />
