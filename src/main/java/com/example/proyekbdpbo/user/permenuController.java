@@ -91,6 +91,9 @@ public class permenuController {
             cartstorage.addItem(item);
             quantityField.clear();
             showAlert("Item successfully added to cart!");
+
+            Stage stage = (Stage) addcartButton.getScene().getWindow();
+            stage.close();
         } catch (NumberFormatException e) {
             System.out.println("Quantity value is not valid!");
             showAlert2("Quantity value is not valid!");

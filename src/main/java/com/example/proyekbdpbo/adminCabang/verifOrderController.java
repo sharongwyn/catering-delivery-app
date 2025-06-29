@@ -52,8 +52,6 @@ public class verifOrderController {
 
     @FXML
     private void initialize(){
-        SessionCabang.setIdCabang(1); // Ganti sesuai session login
-
         setupColumns();
         loadOrders();
         loadDeliveryOptions();

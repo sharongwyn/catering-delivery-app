@@ -103,7 +103,7 @@ public class homeController {
                            JOIN CABANG c ON p.kota::text = c.nama_cabang
                            JOIN MENU_HARIAN_CABANG mhc ON c.id_cabang = mhc.id_cabang
                            JOIN MENU_HARIAN mh ON mh.id_menuHarian = mhc.id_menuHarian
-                           WHERE p.id_user = ?
+                           WHERE p.id_user = ? AND mhc.tanggal_menu = CURRENT_DATE + INTERVAL '1 day'
                            ORDER BY mhc.tanggal_menu DESC
                            LIMIT 3
                 """;
@@ -166,6 +166,24 @@ public class homeController {
                 menu3name.setText(menuName);
                 if (image != null) menu3image.setImage(image);
             }
+        }
+    }
+
+    @FXML
+    private void handleViewCart() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-cart-view.fxml"));
+            Parent root = loader.load();
+
+            cartController controller = loader.getController();
+            controller.setupCart();
+
+            Stage stage = new Stage();
+            stage.setTitle("Your Cart");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

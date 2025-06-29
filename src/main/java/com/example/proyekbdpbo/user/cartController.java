@@ -6,10 +6,17 @@ import com.example.proyekbdpbo.model.cartstorage;
 import com.example.proyekbdpbo.utils.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -197,13 +204,32 @@ public class cartController {
                     }
                     psDetail.executeBatch();
                 }
+
+                // Hitung poin: 10% dari total, dibulatkan ke int
+                int earnedPoints = (int) Math.round(total * 0.10);
+
+                String updatePointSQL = "UPDATE MEMBER SET point_member = point_member + ? WHERE id_pelanggan = ?";
+                try (PreparedStatement psPoint = conn.prepareStatement(updatePointSQL)) {
+                    psPoint.setInt(1, earnedPoints);
+                    psPoint.setInt(2, idPelanggan);
+                    psPoint.executeUpdate();
+                }
+
             }
 
             showAlert("Order placed successfully!");
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-history-view.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) orderButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert("Failed to save order: " + e.getMessage());
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 
@@ -213,5 +239,11 @@ public class cartController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void handleBack(ActionEvent e) {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

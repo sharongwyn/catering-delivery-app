@@ -74,7 +74,7 @@
       <Line fx:id="seperator" endX="183.5" layoutX="146.0" layoutY="291.0" opacity="0.25" startX="-114.5" />
       <HBox layoutX="31.0" layoutY="253.0" prefHeight="25.0" prefWidth="201.0">
          <children>
-            <Label fx:id="branchLabel" prefHeight="23.0" prefWidth="48.0" text="Branch">
+            <Label fx:id="branchLabel" prefHeight="23.0" prefWidth="54.0" text="Branch">
                <font>
                   <Font name="Berlin Sans FB" size="16.0" />
                </font>
@@ -145,7 +145,7 @@
       </ScrollPane>
       <StackPane fx:id="cart" layoutX="239.0" layoutY="545.0" prefHeight="72.0" prefWidth="97.0">
          <children>
-            <Button fx:id="cartButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: #665337;" text="View Cart" textFill="WHITE">
+            <Button fx:id="cartButton" mnemonicParsing="false" onAction="#handleViewCart" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: #665337;" text="View Cart" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>

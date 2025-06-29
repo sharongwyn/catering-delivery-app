@@ -118,7 +118,7 @@ public class orderController {
         JOIN cabang c ON p.kota::text = c.nama_cabang
         JOIN menu_harian_cabang mhc ON c.id_cabang = mhc.id_cabang
         JOIN menu_harian mh ON mhc.id_menuharian = mh.id_menuHarian
-        WHERE p.id_user = ?
+        WHERE p.id_user = ? AND mhc.tanggal_menu = CURRENT_DATE + INTERVAL '1 day'
         ORDER BY mhc.tanggal_menu DESC
         """;
 

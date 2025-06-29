@@ -60,7 +60,6 @@ public class deliveryController {
         colJam.setCellValueFactory(data -> data.getValue().jamProperty());
         colEstimasi.setCellValueFactory(data -> data.getValue().estimasiProperty());
 
-        SessionCabang.setIdCabang(1);
         addDeliveryButton.setCursor(Cursor.HAND);
         updateDeliveryButton.setCursor(Cursor.HAND);
         deleteDeliveryButton.setCursor(Cursor.HAND);

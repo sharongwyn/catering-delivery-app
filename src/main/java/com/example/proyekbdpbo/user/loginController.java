@@ -51,8 +51,10 @@ public class loginController {
             if (rs.next()) {
                 int idUser = rs.getInt("id_user");
 
+                // Simpan ke session
                 Session.setUser(idUser, username);
 
+                // Jika admin cabang → ambil id_cabang
                 if (role.equalsIgnoreCase("admin cabang")) {
                     String cabangQuery = "SELECT id_cabang FROM ADMIN_CABANG WHERE id_user = ?";
                     PreparedStatement cabangPs = conn.prepareStatement(cabangQuery);
@@ -69,7 +71,8 @@ public class loginController {
                 }
 
                 showAlert(Alert.AlertType.INFORMATION, "Login Berhasil", "Hello, " + username);
-                bukaHalamanSesuaiRole(role);
+                bukaHalamanSesuaiRole(role, idUser, username);
+
             } else {
                 showAlert(Alert.AlertType.ERROR, "Login Gagal", "Username atau password salah");
             }
@@ -79,8 +82,7 @@ public class loginController {
         }
     }
 
-    @FXML
-    private void bukaHalamanSesuaiRole(String role) {
+    private void bukaHalamanSesuaiRole(String role, int idUser, String username) {
         try {
             FXMLLoader loader;
             Parent root;
@@ -89,19 +91,17 @@ public class loginController {
                 case "pelanggan":
                     loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-home-view.fxml"));
                     root = loader.load();
-                    // Optional: UserProfileController controller = loader.getController();
+
                     break;
 
                 case "admin cabang":
                     loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/adminc-menu-view.fxml"));
                     root = loader.load();
-                    // Optional: AdminCabangController controller = loader.getController();
                     break;
 
                 case "admin pusat":
                     loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/adminp-performance-view.fxml"));
                     root = loader.load();
-                    // Optional: AdminPusatController controller = loader.getController();
                     break;
 
                 default:
@@ -109,6 +109,7 @@ public class loginController {
                     return;
             }
 
+            // Tampilkan halaman baru di scene yang sama
             Stage stage = (Stage) usnField.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle(role + " page");

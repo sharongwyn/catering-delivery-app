@@ -2,10 +2,12 @@ package com.example.proyekbdpbo.adminCabang;
 
 import com.example.proyekbdpbo.database.DatabaseConnection;
 import com.example.proyekbdpbo.utils.SessionCabang;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -93,41 +95,102 @@ public class menuController implements Initializable {
     public void confirmButton() {
         LocalDate selectedDate = datePicker.getValue();
         if (selectedDate == null) {
-            showAlert("Choose a date first!", Alert.AlertType.WARNING);
+            showAlert("Please choose a date first!", Alert.AlertType.WARNING);
             return;
         }
 
+        if (selectedDate.isBefore(LocalDate.now())) {
+            showAlert("Date cannot be before today!", Alert.AlertType.WARNING);
+            return;
+        }
+
+        int idCabang = SessionCabang.getIdCabang();
         List<ChoiceBox<Menu>> boxes = List.of(menu1ChoiceBox, menu2ChoiceBox, menu3ChoiceBox, menu4ChoiceBox, menu5ChoiceBox, menu6ChoiceBox);
 
-        try {
-            int idCabang = SessionCabang.getIdCabang();
-            String sql = "INSERT INTO menu_harian_cabang (id_cabang, tanggal_menu, id_menuharian) VALUES (?, ?, ?)";
-            PreparedStatement pstmt = DatabaseConnection.getConnection().prepareStatement(sql);
+        // Ambil menu yang dipilih user
+        List<Menu> selectedMenus = new ArrayList<>();
+        for (ChoiceBox<Menu> cb : boxes) {
+            Menu selected = cb.getValue();
+            if (selected != null) {
+                selectedMenus.add(selected);
+            }
+        }
 
-            int count = 0;
+        if (selectedMenus.isEmpty()) {
+            showAlert("Minimum one menu should be selected!", Alert.AlertType.WARNING);
+            return;
+        }
 
-            for (ChoiceBox<Menu> cb : boxes) {
-                Menu selected = cb.getValue();
-                if (selected != null) {
-                    pstmt.setInt(1, idCabang);
-                    pstmt.setDate(2, Date.valueOf(selectedDate));
-                    pstmt.setInt(3, selected.getId());
-                    pstmt.addBatch();
-                    count++;
+        // Cek duplikat dalam input
+        long distinctCount = selectedMenus.stream().map(Menu::getId).distinct().count();
+        if (distinctCount < selectedMenus.size()) {
+            showAlert("There should be no same menus on one date!", Alert.AlertType.WARNING);
+            return;
+        }
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            // Hitung menu yang sudah ada di tanggal tsb untuk cabang tsb
+            String countQuery = "SELECT COUNT(*) FROM menu_harian_cabang WHERE id_cabang = ? AND tanggal_menu = ?";
+            PreparedStatement countStmt = conn.prepareStatement(countQuery);
+            countStmt.setInt(1, idCabang);
+            countStmt.setDate(2, Date.valueOf(selectedDate));
+            ResultSet rsCount = countStmt.executeQuery();
+
+            int existingCount = 0;
+            if (rsCount.next()) {
+                existingCount = rsCount.getInt(1);
+            }
+
+            if (existingCount >= 6) {
+                showAlert("Menu on that date is already full (max. 6).", Alert.AlertType.WARNING);
+                return;
+            }
+
+            int remainingSlots = 6 - existingCount;
+            if (selectedMenus.size() > remainingSlots) {
+                showAlert("You can only add " + remainingSlots + " more menus for this date", Alert.AlertType.WARNING);
+                return;
+            }
+
+            // Cek apakah menu yang dipilih sudah ada sebelumnya (di tanggal & cabang yang sama)
+            String checkQuery = "SELECT id_menuharian FROM menu_harian_cabang WHERE id_cabang = ? AND tanggal_menu = ?";
+            PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
+            checkStmt.setInt(1, idCabang);
+            checkStmt.setDate(2, Date.valueOf(selectedDate));
+            ResultSet rsCheck = checkStmt.executeQuery();
+
+            List<Integer> existingMenuIds = new ArrayList<>();
+            while (rsCheck.next()) {
+                existingMenuIds.add(rsCheck.getInt("id_menuharian"));
+            }
+
+            for (Menu menu : selectedMenus) {
+                if (existingMenuIds.contains(menu.getId())) {
+                    showAlert("Menu \"" + menu.getNama() + "\" already exists in that date!", Alert.AlertType.WARNING);
+                    return;
                 }
             }
 
-            if (count > 0) {
-                pstmt.executeBatch();
-                showAlert("Berhasil menyimpan " + count + " menu!", Alert.AlertType.INFORMATION);
-            } else {
-                showAlert("Tidak ada menu yang dipilih.", Alert.AlertType.WARNING);
+            // Insert menu ke tabel
+            String insertQuery = "INSERT INTO menu_harian_cabang (id_cabang, tanggal_menu, id_menuharian) VALUES (?, ?, ?)";
+            PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
+
+            for (Menu menu : selectedMenus) {
+                insertStmt.setInt(1, idCabang);
+                insertStmt.setDate(2, Date.valueOf(selectedDate));
+                insertStmt.setInt(3, menu.getId());
+                insertStmt.addBatch();
             }
 
+            insertStmt.executeBatch();
+            showAlert("Successfully saved " + selectedMenus.size() + " menu!", Alert.AlertType.INFORMATION);
+
         } catch (SQLException e) {
-            showAlert("Gagal insert menu: " + e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+            showAlert("Fail to insert menu: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
 
     private void showAlert(String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
@@ -158,6 +221,20 @@ public class menuController implements Initializable {
         @Override
         public String toString() {
             return nama;
+        }
+    }
+
+    @FXML
+    private void logOutButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-login-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

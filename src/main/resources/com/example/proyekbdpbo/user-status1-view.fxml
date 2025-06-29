@@ -58,7 +58,7 @@
             </TableView>
          </children>
       </VBox>
-      <Button fx:id="backBtn" layoutX="24.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
+      <Button fx:id="backBtn" layoutX="24.0" layoutY="25.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="35.0" style="-fx-background-color: #665337;" text="🡸" textFill="WHITE" />
     </children>
 
 </AnchorPane>

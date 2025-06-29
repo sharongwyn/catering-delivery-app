@@ -131,11 +131,14 @@ public class status4oController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-status4b-view.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+
+            status4bController controller = loader.getController();
+            controller.setOrderId(orderId);
 
             Stage stage = (Stage) submitButton.getScene().getWindow();
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,6 +161,7 @@ public class status4oController {
             e.printStackTrace();
         }
     }
+    @FXML
     private void goBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-history-view.fxml"));

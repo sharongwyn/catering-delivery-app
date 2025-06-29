@@ -4,9 +4,11 @@ import com.example.proyekbdpbo.database.DatabaseConnection;
 import com.example.proyekbdpbo.model.branch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,9 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class performanceController {
     @FXML
@@ -43,6 +43,7 @@ public class performanceController {
         branchNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         avgRatingCol.setCellValueFactory(new PropertyValueFactory<>("avgRating"));
 
+        updateAverageRating();
         loadBranches();
 
         viewdetailButton.setOnAction(e -> openDetailView());
@@ -62,6 +63,28 @@ public class performanceController {
             Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
             stage.setScene(new Scene(root));
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateAverageRating() {
+        String sql = """
+        UPDATE CABANG
+        SET average_rating = sub.avg_rating
+        FROM (
+            SELECT id_cabang, ROUND(AVG(rating_cabang)::numeric, 2) AS avg_rating
+            FROM RATING_CABANG
+            GROUP BY id_cabang
+        ) AS sub
+        WHERE CABANG.id_cabang = sub.id_cabang
+    """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -109,6 +132,20 @@ public class performanceController {
             }
         } else {
             System.out.println("No branch selected.");
+        }
+    }
+
+    @FXML
+    private void logOutButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-login-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -84,5 +84,10 @@
         <ChoiceBox fx:id="menu4ChoiceBox" layoutX="154.0" layoutY="379.0" prefWidth="150.0" style="-fx-background-color: #F3E5C9;" />
         <ChoiceBox fx:id="menu5ChoiceBox" layoutX="155.0" layoutY="423.0" prefWidth="150.0" style="-fx-background-color: #F3E5C9;" />
         <ChoiceBox fx:id="menu6ChoiceBox" layoutX="155.0" layoutY="468.0" prefWidth="150.0" style="-fx-background-color: #F3E5C9;" />
+      <Button fx:id="logOut" layoutX="266.0" layoutY="29.0" mnemonicParsing="false" onAction="#logOutButton" style="-fx-background-color: #7B5E57; -fx-border-color: #3E2C23; -fx-border-radius: 5; -fx-background-radius: 5;" text="Log Out" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

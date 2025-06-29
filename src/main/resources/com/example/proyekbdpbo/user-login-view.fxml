@@ -37,7 +37,7 @@
         <PasswordField fx:id="passField" layoutX="157.0" layoutY="372.0" style="-fx-background-color: #FFFFFF;" />
         <ImageView fitHeight="175.0" fitWidth="171.0" layoutX="95.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/catering-logo.jpg" />
+                <Image url="@../../../images/logo-new.png" />
             </image>
         </ImageView>
     </children>

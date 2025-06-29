@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 public class addDeliveryController {
     @FXML
@@ -99,6 +101,18 @@ public class addDeliveryController {
             alert.setTitle("Invalid Date");
             alert.setHeaderText(null);
             alert.setContentText("The delivery date cannot be before today.");
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+            LocalTime.parse(deliveryTime);
+            LocalTime.parse(estimatedArrival);
+        } catch (DateTimeParseException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Time Format");
+            alert.setHeaderText(null);
+            alert.setContentText("Format waktu tidak valid. Gunakan format HH:mm (contoh: 09:30 atau 14:00)");
             alert.showAndWait();
             return;
         }

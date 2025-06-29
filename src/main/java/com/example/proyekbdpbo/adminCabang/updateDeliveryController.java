@@ -16,6 +16,8 @@ import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 public class updateDeliveryController {
     @FXML private DatePicker deliveryDatePicker;
@@ -125,6 +127,18 @@ public class updateDeliveryController {
         // Validasi: tanggal tidak boleh mundur
         if (deliveryDate.isBefore(LocalDate.now())) {
             showAlert(AlertType.WARNING, "Invalid Date", "The delivery date cannot be before today.");
+            return;
+        }
+
+        try {
+            LocalTime.parse(deliveryTime);
+            LocalTime.parse(estimatedArrival);
+        } catch (DateTimeParseException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Time Format");
+            alert.setHeaderText(null);
+            alert.setContentText("Format waktu tidak valid. Gunakan format HH:mm (contoh: 09:30 atau 14:00)");
+            alert.showAndWait();
             return;
         }
 

@@ -88,6 +88,7 @@ public class status1Controller {
         orderTable.setItems(orderItems);
     }
 
+    @FXML
     private void goBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-history-view.fxml"));

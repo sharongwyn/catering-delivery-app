@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.profileController">
+<AnchorPane maxHeight="720.0" maxWidth="360.0" prefHeight="720.0" prefWidth="360.0" style="-fx-background-color: #FFFCF7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyekbdpbo.user.profileController">
     <children>
         <HBox layoutY="629.0" prefHeight="90.0" prefWidth="335.0" spacing="42.0" style="-fx-background-color: #FFF5E1;">
             <children>
@@ -100,7 +100,7 @@
         <Label fx:id="tanggalLabel" layoutX="178.0" layoutY="477.0" text="Belum Terdaftar" />
         <Label fx:id="poinLabel" layoutX="178.0" layoutY="514.0" text="Belum Terdaftar" />
         <ImageView fx:id="profileImage" fitHeight="76.0" fitWidth="70.0" layoutX="39.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
-        <Button fx:id="logOut" layoutX="150.0" layoutY="573.0" mnemonicParsing="false" style="-fx-background-color: #665337;" text="Log Out" textFill="#fff5e1">
+        <Button fx:id="logOut" layoutX="150.0" layoutY="573.0" mnemonicParsing="false" onAction="#logOutButton" style="-fx-background-color: #665337;" text="Log Out" textFill="#fff5e1">
             <font>
                 <Font name="Arial Bold" size="12.0" />
             </font></Button>

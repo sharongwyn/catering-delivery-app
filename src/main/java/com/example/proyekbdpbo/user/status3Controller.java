@@ -85,6 +85,7 @@ public class status3Controller {
             e.printStackTrace();
         }
     }
+    @FXML
     private void goBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-history-view.fxml"));

@@ -114,8 +114,14 @@ public class status4bController {
         String review = reviewInput.getText();
         int rating = currentRating;
 
-        int idPelanggan = Session.getIdPelanggan();
+        int idPelanggan = getIdPelangganFromUser(Session.getIdPelanggan());
         int idCabang = getCabangIdFromOrder(orderId);
+
+        System.out.println("Rating selected: " + currentRating);
+        System.out.println("Cabang ID: " + idCabang);
+        System.out.println("Pelanggan ID: " + Session.getIdPelanggan());
+        System.out.println("Review: " + review);
+
 
         submitButton.setCursor(Cursor.HAND);
 
@@ -129,7 +135,7 @@ public class status4bController {
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setInt(1, idCabang);
-            stmt.setInt(2, 1);
+            stmt.setInt(2, idPelanggan);
             stmt.setInt(3, rating);
             if (review == null || review.trim().isEmpty()) {
                 stmt.setNull(4, java.sql.Types.VARCHAR);
@@ -160,6 +166,23 @@ public class status4bController {
         }
     }
 
+    private int getIdPelangganFromUser(int idUser) {
+        int idPelanggan = -1;
+        String query = "SELECT id_pelanggan FROM pelanggan WHERE id_user = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, idUser);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                idPelanggan = rs.getInt("id_pelanggan");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return idPelanggan;
+    }
+
+
     @FXML
     private void handleSkipButton(){
         try {
@@ -175,6 +198,7 @@ public class status4bController {
         }
     }
 
+    @FXML
     private void goBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyekbdpbo/user-history-view.fxml"));
