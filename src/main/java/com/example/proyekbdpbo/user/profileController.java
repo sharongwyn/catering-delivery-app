@@ -212,7 +212,7 @@ public class profileController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Join Member");
         alert.setHeaderText(null);
-        alert.setContentText("Mau jadi member?");
+        alert.setContentText("Want to be a member?");
 
         ButtonType yesButton = new ButtonType("YES", ButtonBar.ButtonData.OK_DONE);
         ButtonType backButton = new ButtonType("BACK", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -228,7 +228,7 @@ public class profileController {
                 ResultSet rs = checkStmt.executeQuery();
 
                 if (rs.next()) {
-                    showAlert(Alert.AlertType.INFORMATION, "Info", "Kamu sudah jadi member.");
+                    showAlert(Alert.AlertType.INFORMATION, "Info", "You're already a member.");
                     return;
                 }
 
@@ -249,12 +249,12 @@ public class profileController {
                 insertStmt.setInt(2, idPelanggan);
                 insertStmt.executeUpdate();
 
-                showAlert(Alert.AlertType.INFORMATION, "Berhasil", "Selamat, kamu telah menjadi member!");
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Congratulations, you are a new member!");
                 loadUserData(); // update UI
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Error", "Gagal mendaftar member.");
+                showAlert(Alert.AlertType.ERROR, "Error", "Fail to register member.");
             }
         }
     }
